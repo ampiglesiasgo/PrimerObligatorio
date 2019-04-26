@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B942E36A227140F800E8A5C8 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B942E369227140F800E8A5C8 /* CollectionViewCell.swift */; };
 		B9BAB27E227106C50074BDC8 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BAB27D227106C50074BDC8 /* TableViewCell.swift */; };
 		B9C378A3226FF4F9002D781D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C378A2226FF4F9002D781D /* AppDelegate.swift */; };
 		B9C378A5226FF4F9002D781D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C378A4226FF4F9002D781D /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B942E369227140F800E8A5C8 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		B9BAB27D227106C50074BDC8 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		B9C3789F226FF4F9002D781D /* PrimerObligatorio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrimerObligatorio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9C378A2226FF4F9002D781D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				B9C378AB226FF4F9002D781D /* LaunchScreen.storyboard */,
 				B9C378AE226FF4F9002D781D /* Info.plist */,
 				B9BAB27D227106C50074BDC8 /* TableViewCell.swift */,
+				B942E369227140F800E8A5C8 /* CollectionViewCell.swift */,
 			);
 			path = PrimerObligatorio;
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 			files = (
 				B9BAB27E227106C50074BDC8 /* TableViewCell.swift in Sources */,
 				B9C378A5226FF4F9002D781D /* ViewController.swift in Sources */,
+				B942E36A227140F800E8A5C8 /* CollectionViewCell.swift in Sources */,
 				B9C378A3226FF4F9002D781D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,6 +301,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Amparo.PrimerObligatorio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
