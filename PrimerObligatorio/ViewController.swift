@@ -28,17 +28,14 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         ModelManager.shared.setProductData()
         ModelManager.shared.setBannerData()
         pageControlOutlet.numberOfPages = ModelManager.shared.banners.count
-        
         for product in ModelManager.shared.products{
-            print("PRODUCT " + "\(product.productCategory)")
-            if !(categories.contains(product.productCategory)){
-                categories.append(product.productCategory)
+            for i in 0...product.count - 1 {
+                if !(categories.contains(product[i].productCategory)){
+                    categories.append(product[i].productCategory)
+                }
             }
-            
         }
-        print("cantidad de categorias " + "\(categories.count)")
-        // Do any additional setup after loading the view, typically from a nib.
-    }
+        }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -47,14 +44,14 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categories.count
+        return ModelManager.shared.products[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for : indexPath) as! TableViewCell
         
         
-        let item = ModelManager.shared.products[indexPath.row]
+        let item = ModelManager.shared.products[indexPath.section][indexPath.row]
         //print("item " + "\(indexPath.row)")
 
         //cell.textLabel?.text = item
@@ -71,12 +68,11 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return self.categories.count
+        return categories.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let section = self.categories[section]
-        //print("section " + "\(section.rawValue)")
         return section.rawValue
     }
     

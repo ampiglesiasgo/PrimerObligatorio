@@ -14,14 +14,11 @@ class ModelManager {
 
     static let shared = ModelManager()
     
-    var products = [ShoppingItem]()
+    var products: [[ShoppingItem]] = [[],[]]
     var banners = [ShoppingBanner]()
-//    var shoppingItem : ShoppingItem
-//    var shoppingBanner : ShoppingBanner
 
 
     func setProductData(){
-        //var products = [ShoppingItem]()
         let productsData:[[String]] = [["Kiwi","Fruits","$30","kiwi.png","Kiwi-2.png"],
                                    ["Grapefruit","Fruits","$45","Grapefruit.png","Grapefruit-2.png"],
                                    ["WaterMelon","Fruits","$30","Watermelon.png","Watermelon-2.png"],
@@ -29,12 +26,20 @@ class ModelManager {
                                    ["Cucumber","Veggies","$30","Cucumber.png","Cucumber.png"]]
         
         for i in 0...productsData.count - 1 {
-            var shoppingItem = ShoppingItem(productName : productsData[i][0],
+            let shoppingItem = ShoppingItem(productName : productsData[i][0],
                                             productCategory : ProductCategory(rawValue: productsData[i][1])!,
                                             productPrice : productsData[i][2],
                                             productImageName : productsData[i][3],
                                             productImageCartName : productsData[i][4])
-            products.append(shoppingItem)
+            switch shoppingItem.productCategory {
+            case .Fruits:
+                products[0].append(shoppingItem)
+            case .Veggies:
+                products[1].append(shoppingItem)
+            default:
+                print("No existe categoria")
+            }
+            
         }
         
     }
@@ -47,7 +52,7 @@ class ModelManager {
                                        ["Kiwi","Sweet kiwi","Banner-4.png"]]
         
         for i in 0...bannerData.count - 1 {
-            var shoppingBanner = ShoppingBanner(bannerTittle: bannerData[i][0],
+            let shoppingBanner = ShoppingBanner(bannerTittle: bannerData[i][0],
                                                 bannerDescription : bannerData[i][1],
                                                 bannerImageName : bannerData[i][2])
             banners.append(shoppingBanner)
