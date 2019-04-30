@@ -11,15 +11,15 @@ import UIKit
 class ViewController: UIViewController , UITableViewDataSource, UITableViewDelegate{
     
     
-    private var currentPage: Int = 0
-    var widthCell:CGFloat = 0
-    var categories = [ProductCategory]()
-
-    
-    
     @IBOutlet weak var tableViewOutlet: UITableView!
     @IBOutlet weak var collectionViewOutlet: UICollectionView!
     @IBOutlet weak var pageControlOutlet: UIPageControl!
+    @IBOutlet weak var searchBarOutlet: UISearchBar!
+    
+    
+    private var currentPage: Int = 0
+    var widthCell:CGFloat = 0
+    var categories = [ProductCategory]()
     
     
     override func viewDidLoad() {
@@ -56,7 +56,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
 
         //cell.textLabel?.text = item
         cell.nameLabelOutlet.text = item.productName
-        cell.priceLabelOutlet.text = item.productPrice
+        cell.priceLabelOutlet.text = "$" + String(item.productPrice)
         cell.productImageOutlet.image = UIImage(named: item.productImageName)
         
         return cell
@@ -80,6 +80,21 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         view.tintColor = UIColor.white
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.textColor = UIColor.black
+    }
+    
+    //
+    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //
+    //        if segue.identifier == "ShoppingCartViewControllerSegue"{
+    //            let shoppingCartViewController = (segue.destination as! ShoppingCartViewController)
+    //            //shoppingCartViewController.ShopingCartList = ModelManager.shared.products
+    //        }
+    //
+    //            }
+
+    @IBAction func shoppingCartButtonAction(_ sender: Any) {
+        performSegue(withIdentifier: "shoppingCartViewControllerSegue", sender: self)
+
     }
     
 }
@@ -115,10 +130,8 @@ extension ViewController :UICollectionViewDataSource, UICollectionViewDelegateFl
         
         return CGSize(width: collectionViewOutlet.frame.size.width - 8 , height: collectionViewOutlet.frame.size.height)
     }
-    
-    
-
-
 
 }
+
+
 
