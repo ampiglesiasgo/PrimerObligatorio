@@ -20,6 +20,9 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     private var currentPage: Int = 0
     var widthCell:CGFloat = 0
     var categories = [ProductCategory]()
+    var filteredTableData: [[ShoppingItem]] = [[],[]]
+    var searching = false
+    var shoppingcart = [ShoppingCartItem]()
     
     
     override func viewDidLoad() {
@@ -44,22 +47,28 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searching{
+            return filteredTableData[section].count
+        }
         return ModelManager.shared.products[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for : indexPath) as! TableViewCell
-        
-        
-        let item = ModelManager.shared.products[indexPath.section][indexPath.row]
-        //print("item " + "\(indexPath.row)")
-
-        //cell.textLabel?.text = item
+        var item : ShoppingItem
+        if searching {
+            item = filteredTableData[indexPath.section][indexPath.row]
+        }
+        else{
+            item = ModelManager.shared.products[indexPath.section][indexPath.row]
+        }
         cell.nameLabelOutlet.text = item.productName
         cell.priceLabelOutlet.text = "$" + String(item.productPrice)
         cell.productImageOutlet.image = UIImage(named: item.productImageName)
-        
+        cell.delegate = self
         return cell
+
+
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -82,21 +91,21 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         header.textLabel?.textColor = UIColor.black
     }
     
-    //
-    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    //
-    //        if segue.identifier == "ShoppingCartViewControllerSegue"{
-    //            let shoppingCartViewController = (segue.destination as! ShoppingCartViewController)
-    //            //shoppingCartViewController.ShopingCartList = ModelManager.shared.products
-    //        }
-    //
-    //            }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+            if segue.identifier == "shoppingCartViewControllerSegue"{
+                let shoppingCartViewController = (segue.destination as! ShoppingCartViewController)
+                    shoppingCartViewController.shopingCartList = shoppingcart
+            }
+    }
+
 
     @IBAction func shoppingCartButtonAction(_ sender: Any) {
         performSegue(withIdentifier: "shoppingCartViewControllerSegue", sender: self)
 
     }
-    
+
 }
     
 extension ViewController :UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -133,5 +142,77 @@ extension ViewController :UICollectionViewDataSource, UICollectionViewDelegateFl
 
 }
 
+extension ViewController : UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredTableData = [[],[]]
+        var auxArray = [String]()
+        var searchItems = [String]()
+        for i in 0...1 {
+            for shopitm in ModelManager.shared.products[i]{
+                auxArray.append(shopitm.productName)
+            }
+        }
+        searchItems = auxArray.filter({$0.prefix(searchText.count) == searchText})
+        for i in 0...1 {
+            for txt in searchItems{
+                for shopIt in ModelManager.shared.products[i]{
+                    if shopIt.productName == txt{
+                        switch shopIt.productCategory {
+                        case .Fruits:
+                            filteredTableData[0].append(shopIt)
+                        case .Veggies:
+                            filteredTableData[1].append(shopIt)
+                        default:
+                            print("No existe categoria")
+                        }
+                    }
+                    
+                }
+            }
+            searching = true
 
+        }
+        tableViewOutlet.reloadData()
+
+    }
+}
+
+extension ViewController: ShoppingCartDelegate {
+    
+    // MARK: - CartDelegate
+    func updateCart(cell: TableViewCell,buttonCall: String) {
+        guard let indexPath = tableViewOutlet.indexPath(for: cell) else { return }
+        let product = ModelManager.shared.products[indexPath.section][indexPath.row]
+        if buttonCall == "add"{
+        let shoppingCartItem = ShoppingCartItem(product: product)
+        shoppingcart.append(shoppingCartItem)
+        cell.addButtonOutlet.isHidden = true
+        cell.buttonPlusViewOutlet.isHidden = false
+        }
+        if buttonCall == "plus"{
+            let product = ModelManager.shared.products[indexPath.section][indexPath.row]
+            let i = shoppingcart.index(where: { $0.product.productName == product.productName })
+            let item = shoppingcart[i!]
+            item.quantity = item.quantity + 1
+            cell.buttonCountOutlet.text = String(item.quantity)
+            
+        }
+        if buttonCall == "minus"{
+            let product = ModelManager.shared.products[indexPath.section][indexPath.row]
+            let i = shoppingcart.index(where: { $0.product.productName == product.productName })
+            let item = shoppingcart[i!]
+            item.quantity = item.quantity - 1
+            if item.quantity == 0 {
+                shoppingcart.remove(at: i!)
+                cell.addButtonOutlet.isHidden = false
+                cell.buttonPlusViewOutlet.isHidden = true
+
+            }
+            cell.buttonCountOutlet.text = String(item.quantity)
+
+        }
+    }
+    
+}
 

@@ -46,7 +46,7 @@ class ShoppingCartViewController: UIViewController , UICollectionViewDataSource,
         cell.shoppingCartImageOutlet.image = UIImage(named: shoppingItem.product.productImageCartName)
         cell.shoppingCartNameItemOutlet.text = shoppingItem.product.productName
         cell.shoppingCartPriceItemOutlet.text = "$" + String(shoppingItem.product.productPrice)
-        cell.shoppingCartCantItemOutlet.text = String(shoppingItem.quantity)
+        cell.shoppingCartCantItemOutlet.text = String(shoppingItem.quantity) + " units"
         
 
         return cell

@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ShoppingCartDelegate {
+    func updateCart(cell: TableViewCell,buttonCall: String)
+}
+
 class TableViewCell: UITableViewCell {
 
     @IBOutlet weak var productImageOutlet: UIImageView!
@@ -19,9 +23,12 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var buttonCountOutlet: UILabel!
     @IBOutlet weak var buttonMinusOutlet: UIButton!
     
+    var delegate : ShoppingCartDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        buttonPlusViewOutlet.isHidden = true
 
     }
     
@@ -46,7 +53,17 @@ class TableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    @IBAction func addButtonAction(_ sender: Any) {
+        self.delegate?.updateCart(cell: self, buttonCall: "add")
+    }
     
-    
+    @IBAction func plusButoonAction(_ sender: Any) {
+        self.delegate?.updateCart(cell: self, buttonCall: "plus")
 
+    }
+    
+    @IBAction func minusButtonAction(_ sender: Any) {
+        self.delegate?.updateCart(cell: self, buttonCall: "minus")
+
+    }
 }
