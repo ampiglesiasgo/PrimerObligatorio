@@ -13,11 +13,11 @@ class ShoppingItem {
     
     var productName : String
     var productCategory : ProductCategory
-    var productPrice : Float
+    var productPrice : Double
     var productImageName : String
     var productImageCartName : String
     
-    init(productName:String , productCategory : ProductCategory , productPrice:Float, productImageName:String,productImageCartName:String) {
+    init(productName:String , productCategory : ProductCategory , productPrice:Double, productImageName:String,productImageCartName:String) {
         self.productName = productName
         self.productCategory = productCategory
         self.productPrice = productPrice

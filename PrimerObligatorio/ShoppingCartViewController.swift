@@ -33,6 +33,13 @@ class ShoppingCartViewController: UIViewController , UICollectionViewDataSource,
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        total()
+        if shopingCartList.count == 0 {
+            checkOutButtonOutlet.isHidden = true
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return shopingCartList.count
     }
@@ -60,8 +67,27 @@ class ShoppingCartViewController: UIViewController , UICollectionViewDataSource,
     }
     
     @IBAction func checkOutButtonAction(_ sender: Any) {
-        _ = navigationController?.popToRootViewController(animated: true)
+        let checkOutInMsg = UIAlertController(title: "CheckOut", message: "Successful purchase", preferredStyle: .alert)
+        let okAcction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default){
+            UIAlertAction in
+            self.shopingCartList = [ShoppingCartItem]()
+            self.navigationController?.popToRootViewController(animated: true)
+            
+        }
+        checkOutInMsg.addAction(okAcction)
+        self.present(checkOutInMsg, animated: true, completion: nil)
 
+
+    }
+    
+    
+    func total(){
+        var total = 0.0
+        for item in shopingCartList{
+            total += item.subTotal
+        }
+        priceTotalOutlet.text = "$" + String(total)
+        
     }
     
     

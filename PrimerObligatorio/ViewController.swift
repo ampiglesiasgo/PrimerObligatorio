@@ -8,7 +8,8 @@
 
 import UIKit
 
-class ViewController: UIViewController , UITableViewDataSource, UITableViewDelegate{
+
+class ViewController: UIViewController , UITableViewDataSource, UITableViewDelegate {
     
     
     @IBOutlet weak var tableViewOutlet: UITableView!
@@ -45,6 +46,8 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searching{
@@ -210,7 +213,6 @@ extension ViewController: ShoppingCartDelegate {
 
             }
             cell.buttonCountOutlet.text = String(item.quantity)
-
         }
     }
     

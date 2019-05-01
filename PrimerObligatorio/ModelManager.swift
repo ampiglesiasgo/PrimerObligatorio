@@ -28,7 +28,7 @@ class ModelManager {
         for i in 0...productsData.count - 1 {
             let shoppingItem = ShoppingItem(productName : productsData[i][0],
                                             productCategory : ProductCategory(rawValue: productsData[i][1])!,
-                                            productPrice : Float(productsData[i][2])!,
+                                            productPrice : Double(productsData[i][2])!,
                                             productImageName : productsData[i][3],
                                             productImageCartName : productsData[i][4])
             switch shoppingItem.productCategory {
