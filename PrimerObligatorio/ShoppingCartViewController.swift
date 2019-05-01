@@ -17,6 +17,7 @@ class ShoppingCartViewController: UIViewController , UICollectionViewDataSource,
     var shopingCartList = [ShoppingCartItem]()
     let pickerData = ["1","2","3","4","5","6","7","8","9","10"]
     var quantitySelected = ""
+    var mainViewController:ViewController?
 
     
     override func viewDidLoad() {
@@ -74,6 +75,7 @@ class ShoppingCartViewController: UIViewController , UICollectionViewDataSource,
         let okAcction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default){
             UIAlertAction in
             self.shopingCartList = [ShoppingCartItem]()
+            self.mainViewController?.shoppingcart = self.shopingCartList
             self.navigationController?.popToRootViewController(animated: true)
             
         }

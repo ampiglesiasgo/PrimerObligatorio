@@ -100,6 +100,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
             if segue.identifier == "shoppingCartViewControllerSegue"{
                 let shoppingCartViewController = (segue.destination as! ShoppingCartViewController)
                     shoppingCartViewController.shopingCartList = shoppingcart
+                    shoppingCartViewController.mainViewController = self
             }
     }
 
