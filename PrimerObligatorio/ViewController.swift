@@ -190,8 +190,8 @@ extension ViewController: ShoppingCartDelegate {
         if buttonCall == "add"{
         let shoppingCartItem = ShoppingCartItem(product: product)
         shoppingcart.append(shoppingCartItem)
-        cell.addButtonOutlet.isHidden = true
-        cell.buttonPlusViewOutlet.isHidden = false
+//        cell.addButtonOutlet.isHidden = true
+//        cell.buttonPlusViewOutlet.isHidden = false
         }
         if buttonCall == "plus"{
             let product = ModelManager.shared.products[indexPath.section][indexPath.row]
@@ -208,8 +208,8 @@ extension ViewController: ShoppingCartDelegate {
             item.quantity = item.quantity - 1
             if item.quantity == 0 {
                 shoppingcart.remove(at: i!)
-                cell.addButtonOutlet.isHidden = false
-                cell.buttonPlusViewOutlet.isHidden = true
+                //cell.addButtonOutlet.isHidden = false
+               // cell.buttonPlusViewOutlet.isHidden = true
 
             }
             cell.buttonCountOutlet.text = String(item.quantity)

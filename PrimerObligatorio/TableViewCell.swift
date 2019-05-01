@@ -47,14 +47,25 @@ class TableViewCell: UITableViewCell {
         buttonPlusViewOutlet.layer.borderColor = UIColor.lightGray.cgColor
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    func setButton(buttonPress: String) {
+        if buttonPress == "add"{
+            addButtonOutlet.isHidden = true
+            buttonPlusViewOutlet.isHidden = false
+            buttonCountOutlet.text = "1"
+        }
+        if buttonPress == "minus"{
+            if buttonCountOutlet.text == "1"{
+                addButtonOutlet.isHidden = false
+                buttonPlusViewOutlet.isHidden = true
+            }
+        }
 
-        // Configure the view for the selected state
     }
     
     @IBAction func addButtonAction(_ sender: Any) {
+        setButton(buttonPress: "add")
         self.delegate?.updateCart(cell: self, buttonCall: "add")
+        
     }
     
     @IBAction func plusButoonAction(_ sender: Any) {
@@ -63,7 +74,9 @@ class TableViewCell: UITableViewCell {
     }
     
     @IBAction func minusButtonAction(_ sender: Any) {
+        setButton(buttonPress: "minus")
         self.delegate?.updateCart(cell: self, buttonCall: "minus")
+        
 
     }
 }

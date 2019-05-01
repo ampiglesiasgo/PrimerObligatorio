@@ -15,6 +15,9 @@ class ShoppingCartViewController: UIViewController , UICollectionViewDataSource,
     @IBOutlet weak var checkOutButtonOutlet: UIButton!
     
     var shopingCartList = [ShoppingCartItem]()
+    let pickerData = ["1","2","3","4","5","6","7","8","9","10"]
+    var quantitySelected = ""
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,7 +92,50 @@ class ShoppingCartViewController: UIViewController , UICollectionViewDataSource,
         priceTotalOutlet.text = "$" + String(total)
         
     }
+
+}
+
+
+extension ShoppingCartViewController : UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerData[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        quantitySelected = pickerData[row]
+    }
     
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let alertView = UIAlertController(
+            title: "Select quantity",
+            message: "\n\n\n\n\n\n\n\n\n",
+            preferredStyle: .alert)
+        
+        let pickerView = UIPickerView(frame:
+            CGRect(x: 0, y: 50, width: 260, height: 162))
+        pickerView.dataSource = self
+        pickerView.delegate = self
+        alertView.view.addSubview(pickerView)
+        let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.default){
+            UIAlertAction in
+            let shopItem = self.shopingCartList[indexPath.row]
+            shopItem.quantity = Int(self.quantitySelected)!
+            self.ShoppingCartCollectionViewOutlet.reloadItems(at: [indexPath])
+            self.total()
+        }
+        alertView.addAction(action)
+        present(alertView, animated: true, completion: { pickerView.frame.size.width = alertView.view.frame.size.width})
+    }
+
 }
