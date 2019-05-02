@@ -29,8 +29,6 @@ class TableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        buttonPlusViewOutlet.isHidden = true
 
     }
     
@@ -48,11 +46,6 @@ class TableViewCell: UITableViewCell {
         buttonPlusViewOutlet.layer.borderWidth=1
         buttonPlusViewOutlet.layer.cornerRadius = 15
         buttonPlusViewOutlet.layer.borderColor = UIColor.lightGray.cgColor
-    }
-    
-    override func prepareForReuse() {
-        addButtonOutlet.isHidden = false
-        buttonPlusViewOutlet.isHidden = true
     }
 
     

@@ -10,7 +10,7 @@ import Foundation
 
 class ShoppingCartItem {
     
-    var quantity : Int = 1
+    var quantity : Int = 0
     var product : ShoppingItem
     var subTotal : Double { get { return product.productPrice * Double(quantity) } }
     

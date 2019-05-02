@@ -46,9 +46,6 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        tableViewOutlet.reloadData()
-    }
     
     //Code to administrate the tableview of products
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -59,6 +56,8 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //buscar aca para que conserve el boton
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for : indexPath) as! TableViewCell
         var item : ShoppingItem
         if searching {
@@ -66,6 +65,23 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         }
         else{
             item = ModelManager.shared.products[indexPath.section][indexPath.row]
+        }
+        
+        var itemInCar = false
+
+        for shoppingCartItem in shoppingcart {
+            if shoppingCartItem.product.productName == item.productName {
+                itemInCar = true
+                let buttonPlusViewOutletIsHidden = shoppingCartItem.quantity == 0
+                cell.buttonPlusViewOutlet.isHidden = buttonPlusViewOutletIsHidden
+                cell.addButtonOutlet.isHidden = !buttonPlusViewOutletIsHidden
+                cell.buttonCountOutlet.text = String(shoppingCartItem.quantity)
+            }
+            
+        }
+        if !itemInCar{
+            cell.addButtonOutlet.isHidden = false
+            cell.buttonPlusViewOutlet.isHidden = true
         }
         cell.nameLabelOutlet.text = item.productName
         cell.priceLabelOutlet.text = "$" + String(item.productPrice)
@@ -190,6 +206,7 @@ extension ViewController: TableViewCellDelegate {
         let i = shoppingcart.index(where: { $0.product.productName == product.productName })
             if i == nil {
                 let shoppingCartItem = ShoppingCartItem(product: product)
+                shoppingCartItem.quantity += 1
                 shoppingcart.append(shoppingCartItem)
             }
             else {
@@ -221,14 +238,16 @@ extension ViewController: TableViewCellDelegate {
         sender.addButtonOutlet.isHidden = true
         sender.buttonPlusViewOutlet.isHidden = false
         sender.buttonCountOutlet.text = "1"
+
     }
     
     func didTapPlusMinus(_ sender: TableViewCell) {
-        if sender.buttonCountOutlet.text == "0"{
-            sender.addButtonOutlet.isHidden = false
-            sender.buttonPlusViewOutlet.isHidden = true
+       if sender.buttonCountOutlet.text == "0"{
+           sender.addButtonOutlet.isHidden = false
+           sender.buttonPlusViewOutlet.isHidden = true
 
-        }
+
+       }
     }
     
 }

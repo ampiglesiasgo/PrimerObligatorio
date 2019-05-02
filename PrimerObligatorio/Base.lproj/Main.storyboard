@@ -296,13 +296,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ezt-Mc-7GF">
-                                                    <rect key="frame" x="10" y="215" width="40" height="18"/>
+                                                    <rect key="frame" x="5" y="215" width="40" height="18"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LNH-z1-CmY">
-                                                    <rect key="frame" x="10" y="243" width="37.5" height="18"/>
+                                                    <rect key="frame" x="5" y="243" width="37.5" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -313,9 +313,9 @@
                                                         <constraint firstAttribute="width" secondItem="gyn-1W-P5I" secondAttribute="height" multiplier="1:1" id="aWr-C6-BjX"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5kb-EH-1Bf">
-                                                    <rect key="frame" x="155.5" y="215" width="39.5" height="19"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kb-EH-1Bf">
+                                                    <rect key="frame" x="162.5" y="215" width="37.5" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -326,10 +326,10 @@
                                             <constraint firstItem="gyn-1W-P5I" firstAttribute="top" secondItem="KW1-uD-G4V" secondAttribute="top" id="L2O-Vh-bYk"/>
                                             <constraint firstAttribute="bottom" secondItem="LNH-z1-CmY" secondAttribute="bottom" constant="5" id="MTT-9W-WXG"/>
                                             <constraint firstItem="5kb-EH-1Bf" firstAttribute="top" secondItem="gyn-1W-P5I" secondAttribute="bottom" constant="10" id="QhX-2M-8Rp"/>
-                                            <constraint firstItem="Ezt-Mc-7GF" firstAttribute="leading" secondItem="KW1-uD-G4V" secondAttribute="leading" constant="10" id="QtJ-fO-Zjf"/>
+                                            <constraint firstItem="Ezt-Mc-7GF" firstAttribute="leading" secondItem="KW1-uD-G4V" secondAttribute="leading" constant="5" id="QtJ-fO-Zjf"/>
                                             <constraint firstItem="5kb-EH-1Bf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ezt-Mc-7GF" secondAttribute="trailing" constant="5" id="RPY-hl-LgY"/>
                                             <constraint firstItem="LNH-z1-CmY" firstAttribute="leading" secondItem="Ezt-Mc-7GF" secondAttribute="leading" id="a83-JS-K8V"/>
-                                            <constraint firstAttribute="trailing" secondItem="5kb-EH-1Bf" secondAttribute="trailing" constant="10" id="gpb-fV-R2L"/>
+                                            <constraint firstAttribute="trailing" secondItem="5kb-EH-1Bf" secondAttribute="trailing" constant="5" id="gpb-fV-R2L"/>
                                             <constraint firstItem="Ezt-Mc-7GF" firstAttribute="top" secondItem="gyn-1W-P5I" secondAttribute="bottom" constant="10" id="l1g-29-WEb"/>
                                             <constraint firstItem="gyn-1W-P5I" firstAttribute="centerX" secondItem="KW1-uD-G4V" secondAttribute="centerX" id="rbl-5W-i2c"/>
                                             <constraint firstItem="LNH-z1-CmY" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Ezt-Mc-7GF" secondAttribute="bottom" constant="5" id="tjB-LI-hPf"/>
