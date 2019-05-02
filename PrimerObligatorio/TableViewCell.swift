@@ -8,8 +8,10 @@
 
 import UIKit
 
-protocol ShoppingCartDelegate {
+protocol TableViewCellDelegate {
     func updateCart(cell: TableViewCell,buttonCall: String)
+    func didTapAdd(_ sender: TableViewCell)
+    func didTapPlusMinus(_ sender: TableViewCell)
 }
 
 class TableViewCell: UITableViewCell {
@@ -23,7 +25,7 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var buttonCountOutlet: UILabel!
     @IBOutlet weak var buttonMinusOutlet: UIButton!
     
-    var delegate : ShoppingCartDelegate?
+    var delegate : TableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,6 +33,7 @@ class TableViewCell: UITableViewCell {
         buttonPlusViewOutlet.isHidden = true
 
     }
+    
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -46,37 +49,29 @@ class TableViewCell: UITableViewCell {
         buttonPlusViewOutlet.layer.cornerRadius = 15
         buttonPlusViewOutlet.layer.borderColor = UIColor.lightGray.cgColor
     }
-
-    func setButton(buttonPress: String) {
-        if buttonPress == "add"{
-            addButtonOutlet.isHidden = true
-            buttonPlusViewOutlet.isHidden = false
-            buttonCountOutlet.text = "1"
-        }
-        if buttonPress == "minus"{
-            if buttonCountOutlet.text == "1"{
-                addButtonOutlet.isHidden = false
-                buttonPlusViewOutlet.isHidden = true
-            }
-        }
-
+    
+    override func prepareForReuse() {
+        addButtonOutlet.isHidden = false
+        buttonPlusViewOutlet.isHidden = true
     }
+
     
     @IBAction func addButtonAction(_ sender: Any) {
-        setButton(buttonPress: "add")
         self.delegate?.updateCart(cell: self, buttonCall: "add")
+        self.delegate?.didTapAdd(self)
         
     }
     
     @IBAction func plusButoonAction(_ sender: Any) {
         self.delegate?.updateCart(cell: self, buttonCall: "plus")
+        self.delegate?.didTapPlusMinus(self)
+
 
     }
     
     @IBAction func minusButtonAction(_ sender: Any) {
-        setButton(buttonPress: "minus")
         self.delegate?.updateCart(cell: self, buttonCall: "minus")
-        
+        self.delegate?.didTapPlusMinus(self)
 
     }
 }

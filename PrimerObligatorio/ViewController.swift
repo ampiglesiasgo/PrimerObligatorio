@@ -47,8 +47,10 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        tableViewOutlet.reloadData()
     }
     
+    //Code to administrate the tableview of products
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searching{
             return filteredTableData[section].count
@@ -69,15 +71,13 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         cell.priceLabelOutlet.text = "$" + String(item.productPrice)
         cell.productImageOutlet.image = UIImage(named: item.productImageName)
         cell.delegate = self
+
         return cell
-
-
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
-    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return categories.count
@@ -94,7 +94,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         header.textLabel?.textColor = UIColor.black
     }
     
-
+    //Send data to the shoppingCartViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
             if segue.identifier == "shoppingCartViewControllerSegue"{
@@ -111,7 +111,8 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     }
 
 }
-    
+
+// Code to create and configurate the banner
 extension ViewController :UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     
@@ -123,15 +124,12 @@ extension ViewController :UICollectionViewDataSource, UICollectionViewDelegateFl
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! CollectionViewCell
             
             let banner = ModelManager.shared.banners[indexPath.row]
-            //print("Banner " + "\(indexPath.row)")
-
             cell.imageBannerViewOutlet.image = UIImage(named: banner.bannerImageName)
             cell.tittleLabelOutlet.text = banner.bannerTittle
             cell.descriptionLabelOutlet.text = banner.bannerDescription
             cell.layer.masksToBounds = true
             cell.layer.cornerRadius = 12
             return cell
-            
         }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -140,12 +138,12 @@ extension ViewController :UICollectionViewDataSource, UICollectionViewDelegateFl
     
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         return CGSize(width: collectionViewOutlet.frame.size.width - 8 , height: collectionViewOutlet.frame.size.height)
     }
 
 }
 
+//Code to administrate the search view of the table
 extension ViewController : UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -168,7 +166,7 @@ extension ViewController : UISearchBarDelegate {
                         case .Veggies:
                             filteredTableData[1].append(shopIt)
                         default:
-                            print("No existe categoria")
+                            print("No categories detected")
                         }
                     }
                     
@@ -181,18 +179,24 @@ extension ViewController : UISearchBarDelegate {
 
     }
 }
-
-extension ViewController: ShoppingCartDelegate {
+//Define the function of the TableViewCellDelegate delegate.
+extension ViewController: TableViewCellDelegate {
     
     // MARK: - CartDelegate
     func updateCart(cell: TableViewCell,buttonCall: String) {
         guard let indexPath = tableViewOutlet.indexPath(for: cell) else { return }
         let product = ModelManager.shared.products[indexPath.section][indexPath.row]
         if buttonCall == "add"{
-        let shoppingCartItem = ShoppingCartItem(product: product)
-        shoppingcart.append(shoppingCartItem)
-//        cell.addButtonOutlet.isHidden = true
-//        cell.buttonPlusViewOutlet.isHidden = false
+        let i = shoppingcart.index(where: { $0.product.productName == product.productName })
+            if i == nil {
+                let shoppingCartItem = ShoppingCartItem(product: product)
+                shoppingcart.append(shoppingCartItem)
+            }
+            else {
+                let i = shoppingcart.index(where: { $0.product.productName == product.productName })
+                let item = shoppingcart[i!]
+                item.quantity = item.quantity + 1
+            }
         }
         if buttonCall == "plus"{
             let product = ModelManager.shared.products[indexPath.section][indexPath.row]
@@ -200,7 +204,6 @@ extension ViewController: ShoppingCartDelegate {
             let item = shoppingcart[i!]
             item.quantity = item.quantity + 1
             cell.buttonCountOutlet.text = String(item.quantity)
-            
         }
         if buttonCall == "minus"{
             let product = ModelManager.shared.products[indexPath.section][indexPath.row]
@@ -209,11 +212,22 @@ extension ViewController: ShoppingCartDelegate {
             item.quantity = item.quantity - 1
             if item.quantity == 0 {
                 shoppingcart.remove(at: i!)
-                //cell.addButtonOutlet.isHidden = false
-               // cell.buttonPlusViewOutlet.isHidden = true
-
             }
             cell.buttonCountOutlet.text = String(item.quantity)
+        }
+    }
+    
+    func didTapAdd(_ sender: TableViewCell) {
+        sender.addButtonOutlet.isHidden = true
+        sender.buttonPlusViewOutlet.isHidden = false
+        sender.buttonCountOutlet.text = "1"
+    }
+    
+    func didTapPlusMinus(_ sender: TableViewCell) {
+        if sender.buttonCountOutlet.text == "0"{
+            sender.addButtonOutlet.isHidden = false
+            sender.buttonPlusViewOutlet.isHidden = true
+
         }
     }
     

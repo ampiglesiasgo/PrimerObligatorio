@@ -44,22 +44,20 @@ class ShoppingCartViewController: UIViewController , UICollectionViewDataSource,
         }
     }
     
+    //Code to administrate the collection of products in the shopping cart
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return shopingCartList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ShoppingCartCollectionCell", for: indexPath) as! ShoppingCartCollectionViewCell
-    
         let shoppingItem = shopingCartList[indexPath.row]
-        print("shoppingItem " + "\(shoppingItem)")
-
         cell.shoppingCartImageOutlet.image = UIImage(named: shoppingItem.product.productImageCartName)
         cell.shoppingCartNameItemOutlet.text = shoppingItem.product.productName
         cell.shoppingCartPriceItemOutlet.text = "$" + String(shoppingItem.product.productPrice)
         cell.shoppingCartCantItemOutlet.text = String(shoppingItem.quantity) + " units"
-        
-
+    
         return cell
     }
     
@@ -77,14 +75,10 @@ class ShoppingCartViewController: UIViewController , UICollectionViewDataSource,
             self.shopingCartList = [ShoppingCartItem]()
             self.mainViewController?.shoppingcart = self.shopingCartList
             self.navigationController?.popToRootViewController(animated: true)
-            
         }
         checkOutInMsg.addAction(okAcction)
         self.present(checkOutInMsg, animated: true, completion: nil)
-
-
     }
-    
     
     func total(){
         var total = 0.0
@@ -92,11 +86,10 @@ class ShoppingCartViewController: UIViewController , UICollectionViewDataSource,
             total += item.subTotal
         }
         priceTotalOutlet.text = "$" + String(total)
-        
     }
-
 }
 
+//Code to administrate the pickerview to change quantity of the products in the shopping cart
 
 extension ShoppingCartViewController : UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -132,7 +125,9 @@ extension ShoppingCartViewController : UIPickerViewDelegate, UIPickerViewDataSou
         let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.default){
             UIAlertAction in
             let shopItem = self.shopingCartList[indexPath.row]
-            shopItem.quantity = Int(self.quantitySelected)!
+            if self.quantitySelected != "" {
+                shopItem.quantity = Int(self.quantitySelected)!
+            }
             self.ShoppingCartCollectionViewOutlet.reloadItems(at: [indexPath])
             self.total()
         }

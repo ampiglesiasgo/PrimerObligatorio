@@ -14,6 +14,6 @@ class ShoppingCartCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var shoppingCartNameItemOutlet: UILabel!
     @IBOutlet weak var shoppingCartCantItemOutlet: UILabel!
     @IBOutlet weak var shoppingCartPriceItemOutlet: UILabel!
-    
+
 }
 
