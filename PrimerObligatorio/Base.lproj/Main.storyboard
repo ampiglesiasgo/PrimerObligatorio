@@ -243,6 +243,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="GFh-37-ear">
+                        <barButtonItem key="backBarButtonItem" title=" " id="QgJ-Yf-oe5"/>
                         <barButtonItem key="rightBarButtonItem" image="icon-cart" id="m86-TI-JHD">
                             <connections>
                                 <action selector="shoppingCartButtonAction:" destination="BYZ-38-t0r" id="tDl-MN-DNQ"/>

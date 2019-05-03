@@ -39,7 +39,11 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
                 }
             }
         }
-        }
+        let imageBack = UIImage(named: "icon-back.png")
+        self.navigationController?.navigationBar.backIndicatorImage = imageBack
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = imageBack
+        
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
