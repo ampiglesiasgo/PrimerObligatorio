@@ -14,7 +14,7 @@ class ModelManager {
 
     static let shared = ModelManager()
     
-    var products: [[ShoppingItem]] = [[],[]]
+    var products: [[ShoppingItem]] = [[],[],[]]
     var banners = [ShoppingBanner]()
 
 
@@ -23,7 +23,10 @@ class ModelManager {
                                    ["Grapefruit","Fruits","45","Grapefruit.png","Grapefruit-2.png"],
                                    ["WaterMelon","Fruits","30","Watermelon.png","Watermelon-2.png"],
                                    ["Avocado","Veggies","30","Avocado.png","Avocado.png"],
-                                   ["Cucumber","Veggies","30","Cucumber.png","Cucumber.png"]]
+                                   ["Cucumber","Veggies","30","Cucumber.png","Cucumber.png"],
+                        ["Beige","Beans","50","beaigeBean.jpg","beaigebeanShopping.jpg"],
+                        ["Black", "Beans", "40", "blackBean.png","blackBeanShopping.png"]]
+    
         
         for i in 0...productsData.count - 1 {
             let shoppingItem = ShoppingItem(productName : productsData[i][0],
@@ -36,8 +39,11 @@ class ModelManager {
                 products[0].append(shoppingItem)
             case .Veggies:
                 products[1].append(shoppingItem)
+            case .Beans:
+                products[2].append(shoppingItem)
+
             default:
-                print("No existe categoria")
+                print("Dont found categories")
             }
             
         }

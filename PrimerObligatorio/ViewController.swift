@@ -21,7 +21,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     private var currentPage: Int = 0
     var widthCell:CGFloat = 0
     var categories = [ProductCategory]()
-    var filteredTableData: [[ShoppingItem]] = [[],[]]
+    var filteredTableData: [[ShoppingItem]] = [[],[],[]]
     var searching = false
     var shoppingcart = [ShoppingCartItem]()
     
@@ -167,16 +167,16 @@ extension ViewController :UICollectionViewDataSource, UICollectionViewDelegateFl
 extension ViewController : UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filteredTableData = [[],[]]
+        filteredTableData = [[],[],[]]
         var auxArray = [String]()
         var searchItems = [String]()
-        for i in 0...1 {
+        for i in 0...ModelManager.shared.products.count - 1 {
             for shopitm in ModelManager.shared.products[i]{
                 auxArray.append(shopitm.productName)
             }
         }
         searchItems = auxArray.filter({$0.prefix(searchText.count) == searchText})
-        for i in 0...1 {
+        for i in 0...ModelManager.shared.products.count - 1  {
             for txt in searchItems{
                 for shopIt in ModelManager.shared.products[i]{
                     if shopIt.productName == txt{
@@ -185,6 +185,9 @@ extension ViewController : UISearchBarDelegate {
                             filteredTableData[0].append(shopIt)
                         case .Veggies:
                             filteredTableData[1].append(shopIt)
+                        case .Beans:
+                            filteredTableData[2].append(shopIt)
+
                         default:
                             print("No categories detected")
                         }

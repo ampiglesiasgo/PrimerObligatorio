@@ -74,6 +74,7 @@ class ShoppingCartViewController: UIViewController , UICollectionViewDataSource,
             UIAlertAction in
             self.shopingCartList = [ShoppingCartItem]()
             self.mainViewController?.shoppingcart = self.shopingCartList
+            self.mainViewController?.tableViewOutlet.reloadData()
             self.navigationController?.popToRootViewController(animated: true)
         }
         checkOutInMsg.addAction(okAcction)

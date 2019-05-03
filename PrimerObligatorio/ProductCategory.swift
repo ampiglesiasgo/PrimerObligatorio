@@ -11,6 +11,7 @@ import Foundation
 enum ProductCategory:String{
     case Fruits
     case Veggies
+    case Beans
     case None
 
 }
