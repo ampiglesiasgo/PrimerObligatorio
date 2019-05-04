@@ -22,19 +22,12 @@ class ShoppingCartViewController: UIViewController , UICollectionViewDataSource,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //shopingCartList = ModelManager.shared.products
-        // Do any additional setup after loading the view.
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         checkOutButtonOutlet.frame.size.height = 50
         checkOutButtonOutlet.layer.cornerRadius = 25
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,6 +61,7 @@ class ShoppingCartViewController: UIViewController , UICollectionViewDataSource,
         return CGSize(width: collectionViewSize/2, height: collectionViewSize/2 + 60)
     }
     
+    //Function of the checkOut button
     @IBAction func checkOutButtonAction(_ sender: Any) {
         let checkOutInMsg = UIAlertController(title: "CheckOut", message: "Successful purchase", preferredStyle: .alert)
         let okAcction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default){

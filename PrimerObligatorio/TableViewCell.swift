@@ -32,7 +32,7 @@ class TableViewCell: UITableViewCell {
 
     }
     
-    
+    // Apply changes in the product image and the buttons
     override func layoutSubviews() {
         super.layoutSubviews()
         let radius = productImageOutlet.frame.width / 2
@@ -48,7 +48,7 @@ class TableViewCell: UITableViewCell {
         buttonPlusViewOutlet.layer.borderColor = UIColor.lightGray.cgColor
     }
 
-    
+    //Methods of the buttons cells 
     @IBAction func addButtonAction(_ sender: Any) {
         self.delegate?.updateCart(cell: self, buttonCall: "add")
         self.delegate?.didTapAdd(self)

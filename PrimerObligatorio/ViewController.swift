@@ -28,7 +28,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //Initial Data
         ModelManager.shared.setProductData()
         ModelManager.shared.setBannerData()
         pageControlOutlet.numberOfPages = ModelManager.shared.banners.count
@@ -44,11 +44,6 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = imageBack
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     
     //Code to administrate the tableview of products
@@ -60,7 +55,6 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //buscar aca para que conserve el boton
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for : indexPath) as! TableViewCell
         var item : ShoppingItem

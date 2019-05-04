@@ -9,8 +9,7 @@
 import Foundation
 
 class ShoppingItem {
-    //Kiwi;Fruits;$30;kiwi.png;Kiwi-2.png
-    
+//Class of the products
     var productName : String
     var productCategory : ProductCategory
     var productPrice : Double

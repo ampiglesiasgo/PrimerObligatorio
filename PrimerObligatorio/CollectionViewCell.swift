@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+//Custom cell of the products
 class CollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageBannerViewOutlet: UIImageView!

@@ -7,11 +7,8 @@
 //
 
 import Foundation
-
-//Kiwi;Sweet kiwi;Banner-4.png
-
+//Class of the banner
 class ShoppingBanner {
-    //Kiwi;Fruits;$30;kiwi.png;Kiwi-2.png
     
     var bannerTittle : String
     var bannerDescription : String

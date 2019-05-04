@@ -8,7 +8,7 @@
 
 import UIKit
 
-
+//Custom cell of the shopping cart
 class ShoppingCartCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var shoppingCartImageOutlet: UIImageView!
     @IBOutlet weak var shoppingCartNameItemOutlet: UILabel!

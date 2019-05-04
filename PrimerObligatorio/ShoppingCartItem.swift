@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+//Class to represente the shopping cart items. 
 class ShoppingCartItem {
     
     var quantity : Int = 0

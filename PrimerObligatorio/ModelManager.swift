@@ -9,7 +9,7 @@
 import Foundation
 
 class ModelManager {
-    
+    //Model
     private init() {}
 
     static let shared = ModelManager()
@@ -17,7 +17,7 @@ class ModelManager {
     var products: [[ShoppingItem]] = [[],[],[]]
     var banners = [ShoppingBanner]()
 
-
+    //Set the data of the products
     func setProductData(){
         let productsData:[[String]] = [["Kiwi","Fruits","30","kiwi.png","Kiwi-2.png"],
                                    ["Grapefruit","Fruits","45","Grapefruit.png","Grapefruit-2.png"],
@@ -50,7 +50,7 @@ class ModelManager {
         
     }
     
-    
+    //Set the data of the shopping banners
     func setBannerData(){
         let bannerData:[[String]] = [["Brazilian Banana","Product of the month","Banner-1.png"],
                                        ["Grapefruit","Winter Fruit","Banner-2.png"],
