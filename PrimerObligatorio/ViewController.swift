@@ -204,17 +204,9 @@ extension ViewController: TableViewCellDelegate {
         guard let indexPath = tableViewOutlet.indexPath(for: cell) else { return }
         let product = ModelManager.shared.products[indexPath.section][indexPath.row]
         if buttonCall == "add"{
-        let i = shoppingcart.index(where: { $0.product.productName == product.productName })
-            if i == nil {
-                let shoppingCartItem = ShoppingCartItem(product: product)
-                shoppingCartItem.quantity += 1
-                shoppingcart.append(shoppingCartItem)
-            }
-            else {
-                let i = shoppingcart.index(where: { $0.product.productName == product.productName })
-                let item = shoppingcart[i!]
-                item.quantity = item.quantity + 1
-            }
+            let shoppingCartItem = ShoppingCartItem(product: product)
+            shoppingCartItem.quantity += 1
+            shoppingcart.append(shoppingCartItem)
         }
         if buttonCall == "plus"{
             let product = ModelManager.shared.products[indexPath.section][indexPath.row]
