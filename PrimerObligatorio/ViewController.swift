@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 
 class ViewController: UIViewController , UITableViewDataSource, UITableViewDelegate {
@@ -33,9 +34,11 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         ModelManager.shared.setBannerData()
         pageControlOutlet.numberOfPages = ModelManager.shared.banners.count
         for product in ModelManager.shared.products{
-            for i in 0...product.count - 1 {
-                if !(categories.contains(product[i].productCategory)){
-                    categories.append(product[i].productCategory)
+            if !(product.isEmpty){
+                for i in 0...product.count - 1 {
+                    if !(categories.contains(product[i].productCategory!)){
+                        categories.append(product[i].productCategory!)
+                    }
                 }
             }
         }
@@ -43,6 +46,25 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         self.navigationController?.navigationBar.backIndicatorImage = imageBack
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = imageBack
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        ModelManager.shared.setBannerData()
+        collectionViewOutlet.reloadData()
+        pageControlOutlet.numberOfPages = ModelManager.shared.banners.count
+        ModelManager.shared.setProductData()
+        print(ModelManager.shared.products)
+        for product in ModelManager.shared.products{
+            if !(product.isEmpty){
+            for i in 0...product.count - 1 {
+                if !(categories.contains(product[i].productCategory!)){
+                    categories.append(product[i].productCategory!)
+                }
+            }
+            }
+        }
+        tableViewOutlet.reloadData()
+
     }
     
     
@@ -82,8 +104,10 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
             cell.buttonPlusViewOutlet.isHidden = true
         }
         cell.nameLabelOutlet.text = item.productName
-        cell.priceLabelOutlet.text = "$" + String(item.productPrice)
-        cell.productImageOutlet.image = UIImage(named: item.productImageName)
+        cell.priceLabelOutlet.text = "$" + String(describing: item.productPrice)
+        if let productImageName = item.productImageName{
+            cell.productImageOutlet.kf.setImage(with: URL(string: productImageName))
+        }
         cell.delegate = self
 
         return cell
@@ -138,7 +162,7 @@ extension ViewController :UICollectionViewDataSource, UICollectionViewDelegateFl
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! CollectionViewCell
             
             let banner = ModelManager.shared.banners[indexPath.row]
-            cell.imageBannerViewOutlet.image = UIImage(named: banner.bannerImageName)
+            cell.imageBannerViewOutlet.kf.setImage(with: URL(string: banner.bannerImageName!))
             cell.tittleLabelOutlet.text = banner.bannerTittle
             cell.descriptionLabelOutlet.text = banner.bannerDescription
             cell.layer.masksToBounds = true
@@ -166,7 +190,7 @@ extension ViewController : UISearchBarDelegate {
         var searchItems = [String]()
         for i in 0...ModelManager.shared.products.count - 1 {
             for shopitm in ModelManager.shared.products[i]{
-                auxArray.append(shopitm.productName)
+                auxArray.append(shopitm.productName!)
             }
         }
         searchItems = auxArray.filter({$0.prefix(searchText.count) == searchText})
@@ -175,11 +199,11 @@ extension ViewController : UISearchBarDelegate {
                 for shopIt in ModelManager.shared.products[i]{
                     if shopIt.productName == txt{
                         switch shopIt.productCategory {
-                        case .Fruits:
+                        case .fruits?:
                             filteredTableData[0].append(shopIt)
-                        case .Veggies:
+                        case .veggies?:
                             filteredTableData[1].append(shopIt)
-                        case .Beans:
+                        case .dairy?:
                             filteredTableData[2].append(shopIt)
 
                         default:

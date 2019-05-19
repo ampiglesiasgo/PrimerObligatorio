@@ -46,9 +46,11 @@ class ShoppingCartViewController: UIViewController , UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ShoppingCartCollectionCell", for: indexPath) as! ShoppingCartCollectionViewCell
         let shoppingItem = shopingCartList[indexPath.row]
-        cell.shoppingCartImageOutlet.image = UIImage(named: shoppingItem.product.productImageCartName)
+        if let productImageName = shoppingItem.product.productImageName{
+            cell.shoppingCartImageOutlet.kf.setImage(with: URL(string: productImageName))
+        }
         cell.shoppingCartNameItemOutlet.text = shoppingItem.product.productName
-        cell.shoppingCartPriceItemOutlet.text = "$" + String(shoppingItem.product.productPrice)
+        cell.shoppingCartPriceItemOutlet.text = "$" + String(describing: shoppingItem.product.productPrice)
         cell.shoppingCartCantItemOutlet.text = String(shoppingItem.quantity) + " units"
     
         return cell

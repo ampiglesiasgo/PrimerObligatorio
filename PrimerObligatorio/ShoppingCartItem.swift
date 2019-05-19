@@ -12,7 +12,7 @@ class ShoppingCartItem {
     
     var quantity : Int = 0
     var product : ShoppingItem
-    var subTotal : Double { get { return product.productPrice * Double(quantity) } }
+    var subTotal : Double { get { return product.productPrice! * Double(quantity) } }
     
     init(product: ShoppingItem) {
         self.product = product

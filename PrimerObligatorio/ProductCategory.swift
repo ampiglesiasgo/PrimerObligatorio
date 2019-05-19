@@ -7,11 +7,11 @@
 //
 
 import Foundation
-
+//Cambiarlos a minuscula
 enum ProductCategory:String{
-    case Fruits
-    case Veggies
-    case Beans
-    case None
+    case fruits
+    case veggies
+    case dairy
+    case none
 
 }

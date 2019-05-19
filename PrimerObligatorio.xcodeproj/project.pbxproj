@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		472D772FBFCFC168BD1A9DDB /* Pods_PrimerObligatorio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1462B65B6B7E6D7B87431BEA /* Pods_PrimerObligatorio.framework */; };
 		B942E36A227140F800E8A5C8 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B942E369227140F800E8A5C8 /* CollectionViewCell.swift */; };
+		B9449409228E3E9600111FAD /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9449408228E3E9600111FAD /* ApiManager.swift */; };
 		B94FF74D227633F500EABAEF /* ShoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94FF74C227633F500EABAEF /* ShoppingCartViewController.swift */; };
 		B94FF74F2276396800EABAEF /* ShoppingCartCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94FF74E2276396800EABAEF /* ShoppingCartCollectionViewCell.swift */; };
 		B94FF751227678F300EABAEF /* ShoppingCartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94FF750227678F300EABAEF /* ShoppingCartItem.swift */; };
@@ -24,7 +26,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1462B65B6B7E6D7B87431BEA /* Pods_PrimerObligatorio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PrimerObligatorio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		31CEA1F6CB2842B00E6F2392 /* Pods-PrimerObligatorio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PrimerObligatorio.release.xcconfig"; path = "Target Support Files/Pods-PrimerObligatorio/Pods-PrimerObligatorio.release.xcconfig"; sourceTree = "<group>"; };
+		322726674660EF4372C086D9 /* Pods-PrimerObligatorio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PrimerObligatorio.debug.xcconfig"; path = "Target Support Files/Pods-PrimerObligatorio/Pods-PrimerObligatorio.debug.xcconfig"; sourceTree = "<group>"; };
 		B942E369227140F800E8A5C8 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		B9449408228E3E9600111FAD /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		B94FF74C227633F500EABAEF /* ShoppingCartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartViewController.swift; sourceTree = "<group>"; };
 		B94FF74E2276396800EABAEF /* ShoppingCartCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartCollectionViewCell.swift; sourceTree = "<group>"; };
 		B94FF750227678F300EABAEF /* ShoppingCartItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartItem.swift; sourceTree = "<group>"; };
@@ -47,17 +53,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				472D772FBFCFC168BD1A9DDB /* Pods_PrimerObligatorio.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2EA66217DDB72BFCA4D28359 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1462B65B6B7E6D7B87431BEA /* Pods_PrimerObligatorio.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B9C37896226FF4F9002D781D = {
 			isa = PBXGroup;
 			children = (
 				B9C378A1226FF4F9002D781D /* PrimerObligatorio */,
 				B9C378A0226FF4F9002D781D /* Products */,
+				C39A1DFB278538AAD3ECDEB0 /* Pods */,
+				2EA66217DDB72BFCA4D28359 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -87,8 +104,18 @@
 				B94FF74C227633F500EABAEF /* ShoppingCartViewController.swift */,
 				B94FF74E2276396800EABAEF /* ShoppingCartCollectionViewCell.swift */,
 				B94FF750227678F300EABAEF /* ShoppingCartItem.swift */,
+				B9449408228E3E9600111FAD /* ApiManager.swift */,
 			);
 			path = PrimerObligatorio;
+			sourceTree = "<group>";
+		};
+		C39A1DFB278538AAD3ECDEB0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				322726674660EF4372C086D9 /* Pods-PrimerObligatorio.debug.xcconfig */,
+				31CEA1F6CB2842B00E6F2392 /* Pods-PrimerObligatorio.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -98,9 +125,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B9C378B1226FF4F9002D781D /* Build configuration list for PBXNativeTarget "PrimerObligatorio" */;
 			buildPhases = (
+				A95BB99B4B6248DF9C561F6C /* [CP] Check Pods Manifest.lock */,
 				B9C3789B226FF4F9002D781D /* Sources */,
 				B9C3789C226FF4F9002D781D /* Frameworks */,
 				B9C3789D226FF4F9002D781D /* Resources */,
+				21F6DD14006A10BDE209F3AB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -158,6 +187,51 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		21F6DD14006A10BDE209F3AB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PrimerObligatorio/Pods-PrimerObligatorio-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PrimerObligatorio/Pods-PrimerObligatorio-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A95BB99B4B6248DF9C561F6C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PrimerObligatorio-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B9C3789B226FF4F9002D781D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -167,6 +241,7 @@
 				B9908B1722729121006C1A71 /* ModelManager.swift in Sources */,
 				B94FF74F2276396800EABAEF /* ShoppingCartCollectionViewCell.swift in Sources */,
 				B94FF74D227633F500EABAEF /* ShoppingCartViewController.swift in Sources */,
+				B9449409228E3E9600111FAD /* ApiManager.swift in Sources */,
 				B9908B1322728E5D006C1A71 /* ProductCategory.swift in Sources */,
 				B9908B152272901B006C1A71 /* ShoppingBanner.swift in Sources */,
 				B9C378A5226FF4F9002D781D /* ViewController.swift in Sources */,
@@ -308,6 +383,7 @@
 		};
 		B9C378B2226FF4F9002D781D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 322726674660EF4372C086D9 /* Pods-PrimerObligatorio.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -322,6 +398,7 @@
 		};
 		B9C378B3226FF4F9002D781D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 31CEA1F6CB2842B00E6F2392 /* Pods-PrimerObligatorio.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
