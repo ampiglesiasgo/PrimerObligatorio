@@ -49,8 +49,11 @@ class ShoppingCartViewController: UIViewController , UICollectionViewDataSource,
         if let productImageName = shoppingItem.product.productImageName{
             cell.shoppingCartImageOutlet.kf.setImage(with: URL(string: productImageName))
         }
+        else{
+            cell.shoppingCartImageOutlet.image = UIImage(named:"No_image")
+        }
         cell.shoppingCartNameItemOutlet.text = shoppingItem.product.productName
-        cell.shoppingCartPriceItemOutlet.text = "$" + String(describing: shoppingItem.product.productPrice)
+        cell.shoppingCartPriceItemOutlet.text = "$" + String(describing: shoppingItem.product.productPrice!)
         cell.shoppingCartCantItemOutlet.text = String(shoppingItem.quantity) + " units"
     
         return cell

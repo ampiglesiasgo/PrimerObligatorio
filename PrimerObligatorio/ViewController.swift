@@ -104,9 +104,12 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
             cell.buttonPlusViewOutlet.isHidden = true
         }
         cell.nameLabelOutlet.text = item.productName
-        cell.priceLabelOutlet.text = "$" + String(describing: item.productPrice)
+        cell.priceLabelOutlet.text = "$" + String(describing: item.productPrice!)
         if let productImageName = item.productImageName{
             cell.productImageOutlet.kf.setImage(with: URL(string: productImageName))
+        }
+        else{
+            cell.productImageOutlet.image = UIImage(named:"No_image")
         }
         cell.delegate = self
 
