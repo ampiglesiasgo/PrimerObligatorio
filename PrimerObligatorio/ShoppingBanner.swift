@@ -15,17 +15,9 @@ class ShoppingBanner {
     var bannerDescription : String?
     var bannerImageName : String?
 
-    
-//    init(bannerTittle:String , bannerDescription : String , bannerImageName:String) {
-//        self.bannerTittle = bannerTittle
-//        self.bannerDescription = bannerDescription
-//        self.bannerImageName = bannerImageName
-//
-//    }
     required init?(map: Map) {
         
     }
-
 }
 
 extension ShoppingBanner : Mappable {

@@ -30,18 +30,6 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         //Initial Data
-//        ModelManager.shared.setProductData()
-//        ModelManager.shared.setBannerData()
-//        pageControlOutlet.numberOfPages = ModelManager.shared.banners.count
-//        for product in ModelManager.shared.products{
-//            if !(product.isEmpty){
-//                for i in 0...product.count - 1 {
-//                    if !(categories.contains(product[i].productCategory!)){
-//                        categories.append(product[i].productCategory!)
-//                    }
-//                }
-//            }
-//        }
         let imageBack = UIImage(named: "icon-back.png")
         self.navigationController?.navigationBar.backIndicatorImage = imageBack
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = imageBack
@@ -49,24 +37,51 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        ModelManager.shared.setBannerData()
-        collectionViewOutlet.reloadData()
-        pageControlOutlet.numberOfPages = ModelManager.shared.banners.count
-        ModelManager.shared.setProductData()
-        print(ModelManager.shared.products)
-        for product in ModelManager.shared.products{
-            if !(product.isEmpty){
-            for i in 0...product.count - 1 {
-                if !(categories.contains(product[i].productCategory!)){
-                    categories.append(product[i].productCategory!)
-                }
-            }
+        //SET BANNER DATA
+        ApiManager.apiManager.getBanners { (shoppingBanner) in
+            ModelManager.shared.banners = shoppingBanner
+            if !(ModelManager.shared.banners.isEmpty){
+                self.collectionViewOutlet.reloadData()
+                self.pageControlOutlet.numberOfPages = ModelManager.shared.banners.count
             }
         }
-        tableViewOutlet.reloadData()
-
+        //SET PRODUCT DATA
+        ApiManager.apiManager.getProducts {(shoppingItem) in
+            ModelManager.shared.productData = shoppingItem
+            for i in 0...ModelManager.shared.productData.count - 1 {
+                switch ModelManager.shared.productData[i].productCategory {
+                case .fruits?:
+                    if !(ModelManager.shared.products[0].contains(where: { $0.productId == ModelManager.shared.productData[i].productId })){
+                        ModelManager.shared.products[0].append(ModelManager.shared.productData[i])
+                    }
+                case .veggies?:
+                    if !(ModelManager.shared.products[1].contains(where: { $0.productId == ModelManager.shared.productData[i].productId })){
+                        ModelManager.shared.products[1].append(ModelManager.shared.productData[i])
+                    }
+                case .dairy?:
+                    if !(ModelManager.shared.products[2].contains(where: { $0.productId == ModelManager.shared.productData[i].productId })){
+                        ModelManager.shared.products[2].append(ModelManager.shared.productData[i])
+                    }
+                    
+                default:
+                    print("Dont found categories")
+                }
+            }
+            if !(ModelManager.shared.products.isEmpty){
+                for product in ModelManager.shared.products{
+                    if !(product.isEmpty){
+                        for i in 0...product.count - 1 {
+                            if !(self.categories.contains(product[i].productCategory!)){
+                                self.categories.append(product[i].productCategory!)
+                            }
+                        }
+                    }
+                }
+                self.tableViewOutlet.reloadData()
+            }
+        }
     }
-    
+
     
     //Code to administrate the tableview of products
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -162,16 +177,28 @@ extension ViewController :UICollectionViewDataSource, UICollectionViewDelegateFl
         }
         
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! CollectionViewCell
-            
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! CollectionViewCell
+        let activityIndicator = UIActivityIndicatorView()
+        // Create the activity indicator
+        activityIndicator.color = .gray
+        if ModelManager.shared.banners.isEmpty{
+            view.addSubview(activityIndicator) // add it as a  subview
+            activityIndicator.center = CGPoint(x: view.frame.size.width*0.5, y: view.frame.size.height*0.5) // put in the middle
+            activityIndicator.startAnimating() // Start animating
+            }
+        else{
+            activityIndicator.stopAnimating() // On response stop animating
+            activityIndicator.removeFromSuperview()
             let banner = ModelManager.shared.banners[indexPath.row]
             cell.imageBannerViewOutlet.kf.setImage(with: URL(string: banner.bannerImageName!))
             cell.tittleLabelOutlet.text = banner.bannerTittle
             cell.descriptionLabelOutlet.text = banner.bannerDescription
             cell.layer.masksToBounds = true
             cell.layer.cornerRadius = 12
-            return cell
         }
+        return cell
+
+    }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         pageControlOutlet.currentPage = indexPath.row
