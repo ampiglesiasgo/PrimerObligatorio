@@ -30,18 +30,18 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         //Initial Data
-        ModelManager.shared.setProductData()
-        ModelManager.shared.setBannerData()
-        pageControlOutlet.numberOfPages = ModelManager.shared.banners.count
-        for product in ModelManager.shared.products{
-            if !(product.isEmpty){
-                for i in 0...product.count - 1 {
-                    if !(categories.contains(product[i].productCategory!)){
-                        categories.append(product[i].productCategory!)
-                    }
-                }
-            }
-        }
+//        ModelManager.shared.setProductData()
+//        ModelManager.shared.setBannerData()
+//        pageControlOutlet.numberOfPages = ModelManager.shared.banners.count
+//        for product in ModelManager.shared.products{
+//            if !(product.isEmpty){
+//                for i in 0...product.count - 1 {
+//                    if !(categories.contains(product[i].productCategory!)){
+//                        categories.append(product[i].productCategory!)
+//                    }
+//                }
+//            }
+//        }
         let imageBack = UIImage(named: "icon-back.png")
         self.navigationController?.navigationBar.backIndicatorImage = imageBack
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = imageBack
