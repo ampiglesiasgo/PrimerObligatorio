@@ -85,4 +85,20 @@ class ApiManager {
                 }
     }
     
+//    
+//    func getPurchases( completionHandler: @escaping ([ShoppingCartItem]) -> Void){
+//        let url = baseUrl + "/purchases"
+//        Alamofire.request(url).responseArray { (response: DataResponse<[ShoppingCartItem]>) in
+//            
+//            let shoppingBanner = response.result.value
+//            completionHandler(shoppingBanner!)
+//            
+//            guard response.result.isSuccess else {
+//                print("Error while fetching remote rooms: \"(String(describing: response.result.error)")
+//                completionHandler([ShoppingBanner]())
+//                return
+//            }
+//        }
+//    }
+    
 }
