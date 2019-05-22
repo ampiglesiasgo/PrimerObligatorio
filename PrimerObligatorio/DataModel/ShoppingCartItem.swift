@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ObjectMapper
 //Class to represente the shopping cart items. 
 class ShoppingCartItem {
     
@@ -17,4 +18,5 @@ class ShoppingCartItem {
     init(product: ShoppingItem) {
         self.product = product
     }
+
 }

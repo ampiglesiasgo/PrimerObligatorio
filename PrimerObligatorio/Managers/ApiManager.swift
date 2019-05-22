@@ -26,7 +26,7 @@ class ApiManager {
             completionHandler(shoppingItem!)
 
             guard response.result.isSuccess else {
-                print("Error while fetching remote rooms: \"(String(describing: response.result.error)")
+                print("Error \"(String(describing: response.result.error)")
                 completionHandler([ShoppingItem]())
                 return
             }
@@ -41,7 +41,7 @@ class ApiManager {
                 completionHandler(shoppingBanner!)
     
                 guard response.result.isSuccess else {
-                    print("Error while fetching remote rooms: \"(String(describing: response.result.error)")
+                    print("Error: \"(String(describing: response.result.error)")
                     completionHandler([ShoppingBanner]())
                     return
                 }
@@ -85,20 +85,24 @@ class ApiManager {
                 }
     }
     
-//    
-//    func getPurchases( completionHandler: @escaping ([ShoppingCartItem]) -> Void){
-//        let url = baseUrl + "/purchases"
-//        Alamofire.request(url).responseArray { (response: DataResponse<[ShoppingCartItem]>) in
-//            
-//            let shoppingBanner = response.result.value
-//            completionHandler(shoppingBanner!)
-//            
-//            guard response.result.isSuccess else {
-//                print("Error while fetching remote rooms: \"(String(describing: response.result.error)")
-//                completionHandler([ShoppingBanner]())
-//                return
-//            }
-//        }
-//    }
+    
+    func getPurchases( completionHandler: @escaping ([Purchase]) -> Void){
+        let url = baseUrl + "/purchases"
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer 14C07351-E2F4-49B8-AFC5-FDA310EFE792" ]
+        Alamofire.request(url,headers: headers).responseArray { (response: DataResponse<[Purchase]>) in
+            
+            let purchase = response.result.value
+            if let purchase = purchase{
+                completionHandler(purchase)
+            }
+            
+            guard response.result.isSuccess else {
+                print("Error: \"(String(describing: response.result.error)")
+                completionHandler([Purchase]())
+                return
+            }
+        }
+    }
     
 }

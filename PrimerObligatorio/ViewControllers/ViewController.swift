@@ -82,7 +82,10 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
                 self.tableViewOutlet.reloadData()
             }
         }
-
+        ApiManager.apiManager.getPurchases { (purchase) in
+            
+            print(purchase)
+        }
     }
 
     
