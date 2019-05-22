@@ -52,7 +52,8 @@ class ApiManager {
     func checkOutApi(token: String ,shoppingCartItems : [ShoppingCartItem], completionHandler: @escaping (String?) -> Void) {
         let url = baseUrl + "/checkout"
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer 14C07351-E2F4-49B8-AFC5-FDA310EFE792" ]
+            "Authorization": "Bearer 14C07351-E2F4-49B8-AFC5-FDA310EFE792" ,
+            "content-type":"application/json"]
 
         var product: [String:Any] = [:]
         var productsList = [product]
@@ -68,7 +69,7 @@ class ApiManager {
         Alamofire.request(url,
                           method: .post,
                           parameters: parameters,
-                          encoding: URLEncoding.httpBody,
+                          encoding: JSONEncoding.default,
                           headers: headers).responseString {
                             response in
                             switch response.result {
