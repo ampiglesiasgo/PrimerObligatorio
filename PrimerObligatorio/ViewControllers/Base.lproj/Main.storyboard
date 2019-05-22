@@ -304,7 +304,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LNH-z1-CmY">
-                                                    <rect key="frame" x="5" y="243" width="37.5" height="18"/>
+                                                    <rect key="frame" x="5" y="243" width="195" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -332,6 +332,7 @@
                                             <constraint firstItem="5kb-EH-1Bf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ezt-Mc-7GF" secondAttribute="trailing" constant="5" id="RLM-ml-lRV"/>
                                             <constraint firstItem="5kb-EH-1Bf" firstAttribute="trailing" secondItem="gyn-1W-P5I" secondAttribute="trailing" constant="-5" id="RP1-Yp-3oO"/>
                                             <constraint firstItem="LNH-z1-CmY" firstAttribute="leading" secondItem="Ezt-Mc-7GF" secondAttribute="leading" id="a83-JS-K8V"/>
+                                            <constraint firstItem="LNH-z1-CmY" firstAttribute="trailing" secondItem="5kb-EH-1Bf" secondAttribute="trailing" id="dWo-65-hWA"/>
                                             <constraint firstItem="Ezt-Mc-7GF" firstAttribute="top" secondItem="gyn-1W-P5I" secondAttribute="bottom" constant="10" id="l1g-29-WEb"/>
                                             <constraint firstItem="gyn-1W-P5I" firstAttribute="centerX" secondItem="KW1-uD-G4V" secondAttribute="centerX" id="rbl-5W-i2c"/>
                                             <constraint firstItem="LNH-z1-CmY" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Ezt-Mc-7GF" secondAttribute="bottom" constant="5" id="tjB-LI-hPf"/>

@@ -25,6 +25,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     var filteredTableData: [[ShoppingItem]] = [[],[],[]]
     var searching = false
     var shoppingcart = [ShoppingCartItem]()
+    var token:String = ""
     
     
     override func viewDidLoad() {
@@ -37,6 +38,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     }
     
     override func viewWillAppear(_ animated: Bool) {
+
         //SET BANNER DATA
         ApiManager.apiManager.getBanners { (shoppingBanner) in
             ModelManager.shared.banners = shoppingBanner
@@ -80,6 +82,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
                 self.tableViewOutlet.reloadData()
             }
         }
+
     }
 
     

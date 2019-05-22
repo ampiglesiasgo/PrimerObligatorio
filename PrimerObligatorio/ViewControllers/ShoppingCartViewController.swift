@@ -18,6 +18,20 @@ class ShoppingCartViewController: UIViewController , UICollectionViewDataSource,
     let pickerData = ["1","2","3","4","5","6","7","8","9","10"]
     var quantitySelected = ""
     var mainViewController:ViewController?
+    var msgPurchase = ""
+    var token = ""
+    
+    func autherization() -> String {
+        if token == "" {
+        AuthenticationManager.shared.authenticate(onCompletion: {response in
+            // self.token = "Bearer \(response.token)"
+            self.token = response.token
+        })
+            return token
+        }
+        return token
+    }
+
 
     
     override func viewDidLoad() {
@@ -68,7 +82,12 @@ class ShoppingCartViewController: UIViewController , UICollectionViewDataSource,
     
     //Function of the checkOut button
     @IBAction func checkOutButtonAction(_ sender: Any) {
-        let checkOutInMsg = UIAlertController(title: "CheckOut", message: "Successful purchase", preferredStyle: .alert)
+        let token = autherization()
+        ApiManager.apiManager.checkOutApi(token: token, shoppingCartItems: shopingCartList) { (message) in
+            self.msgPurchase = message!
+        }
+
+        let checkOutInMsg = UIAlertController(title: "CheckOut", message: msgPurchase, preferredStyle: .alert)
         let okAcction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default){
             UIAlertAction in
             self.shopingCartList = [ShoppingCartItem]()
