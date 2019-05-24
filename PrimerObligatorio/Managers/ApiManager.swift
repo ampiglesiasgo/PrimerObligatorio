@@ -18,41 +18,42 @@ class ApiManager {
 
     let baseUrl = "https://us-central1-ucu-ios-api.cloudfunctions.net"
     
-    func getProducts( completionHandler: @escaping ([ShoppingItem]) -> Void){
+    func getProducts( completionHandler: @escaping ([ShoppingItem]?,Error?) -> Void){
         let url = baseUrl + "/products"
-        Alamofire.request(url).responseArray { (response: DataResponse<[ShoppingItem]>) in
-
-            let shoppingItem = response.result.value
-            completionHandler(shoppingItem!)
+        //let url = baseUrl + "/product" //Only for test Error
+        Alamofire.request(url,method: .get).responseArray { (response: DataResponse<[ShoppingItem]>) in
 
             guard response.result.isSuccess else {
-                print("Error \"(String(describing: response.result.error)")
-                completionHandler([ShoppingItem]())
+                completionHandler(nil,response.result.error)
                 return
             }
+            let shoppingItem = response.result.value
+            completionHandler(shoppingItem,nil)
+
         }
     }
     
-    func getBanners(completionHandler: @escaping ([ShoppingBanner]) -> Void){
+    func getBanners(completionHandler: @escaping ([ShoppingBanner]?,Error?) -> Void){
             let url = baseUrl + "/promoted"
-            Alamofire.request(url).responseArray { (response: DataResponse<[ShoppingBanner]>) in
-    
-                let shoppingBanner = response.result.value
-                completionHandler(shoppingBanner!)
-    
+           // let url = baseUrl + "/promote" //Only for test Error
+            Alamofire.request(url,method: .get).responseArray { (response: DataResponse<[ShoppingBanner]>) in
+        
                 guard response.result.isSuccess else {
-                    print("Error: \"(String(describing: response.result.error)")
-                    completionHandler([ShoppingBanner]())
+                    print("Error \(String(describing: response.result.error))")
+                    completionHandler(nil,response.result.error)
                     return
                 }
+                let shoppingBanner = response.result.value
+                completionHandler(shoppingBanner,nil)
+
             }
         }
     
     
-    func checkOutApi(token: String ,shoppingCartItems : [ShoppingCartItem], completionHandler: @escaping (String?) -> Void) {
+    func checkOutApi(token: String ,shoppingCartItems : [ShoppingCartItem], completionHandler: @escaping (String?,Error?) -> Void) {
         let url = baseUrl + "/checkout"
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer 14C07351-E2F4-49B8-AFC5-FDA310EFE792" ,
+            "Authorization": token ,
             "content-type":"application/json"]
 
         var product: [String:Any] = [:]
@@ -74,33 +75,29 @@ class ApiManager {
                             response in
                             switch response.result {
                             case .success:
-                                print(response)
-                                completionHandler("Successful purchase")
+                                completionHandler(response.description,nil)
                                 
                                 break
                             case .failure(let error):
-                                
-                                print(error)
-                                completionHandler("Something went wrong, try again later")
+                                completionHandler(nil,error)
                             }
                 }
     }
     
-    
-    func getPurchases( completionHandler: @escaping ([Purchase]) -> Void){
+    func getPurchases(token: String, completionHandler: @escaping ([Purchase]?,Error?) -> Void){
         let url = baseUrl + "/purchases"
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer 14C07351-E2F4-49B8-AFC5-FDA310EFE792" ]
+            "Authorization": token ]
         Alamofire.request(url,headers: headers).responseArray { (response: DataResponse<[Purchase]>) in
             
             let purchase = response.result.value
             if let purchase = purchase{
-                completionHandler(purchase)
+                completionHandler(purchase,nil)
             }
             
             guard response.result.isSuccess else {
                 print("Error: \"(String(describing: response.result.error)")
-                completionHandler([Purchase]())
+                completionHandler(nil,response.result.error)
                 return
             }
         }

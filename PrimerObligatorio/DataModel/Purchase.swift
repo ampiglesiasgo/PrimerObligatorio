@@ -10,7 +10,7 @@ import Foundation
 import ObjectMapper
 
 class Purchase {
-    var date:Date?
+    var date: Date?
     var products : [PurchaseShoppingCartItem]?
 
     required init?(map: Map) {
@@ -22,9 +22,8 @@ class Purchase {
 extension Purchase : Mappable {
     
     func mapping(map: Map) {
-        date <- map["date"]
         products <- map["products"]
-
-    }
+        date <- (map["date"], CustomDateTransform())
+        }
     
 }

@@ -13,7 +13,8 @@ class PurchaseShoppingCartItem {
     
     var quantity : Int?
     var product : ShoppingItem?
-    var subTotal : Double { get { return product!.productPrice! * Double(quantity!) } }
+    var subTotal : Double { get { if let product = product{if let price = product.productPrice {if let quantity = quantity{return price * Double(quantity)} else {return 0}} else {return 0}} else {return 0}}}
+    
     
     required init?(map: Map) {
     }
@@ -24,7 +25,7 @@ class PurchaseShoppingCartItem {
 extension PurchaseShoppingCartItem : Mappable {
     
     func mapping(map: Map) {
-        product <- map["products"]
+        product <- map["product"]
         quantity <- map["quantity"]
         
     }

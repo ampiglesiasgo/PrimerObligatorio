@@ -16,6 +16,7 @@ class ShoppingItem {
     var productCategory : ProductCategory?
     var productPrice : Double?
     var productImageName : String?
+    var unroundedprice: Double?
 
     required init?(map: Map) {
         
@@ -28,7 +29,8 @@ extension ShoppingItem : Mappable {
     func mapping(map: Map) {
         productId <- map["id"]
         productName <- map["name"]
-        productPrice <- map["price"]
+        unroundedprice <- map["price"]
+        productPrice = Double(String(format: "%.2f", unroundedprice!))
         productCategory <- map["category"]
         productImageName <- map["photoUrl"]
     }

@@ -22,6 +22,9 @@
 		B9BAB27E227106C50074BDC8 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BAB27D227106C50074BDC8 /* TableViewCell.swift */; };
 		B9BC031022950A8300253E6B /* Purchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BC030F22950A8300253E6B /* Purchase.swift */; };
 		B9BC0312229510EA00253E6B /* PurchaseShoppingCartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BC0311229510EA00253E6B /* PurchaseShoppingCartItem.swift */; };
+		B9BC03142295E0AA00253E6B /* PurchaseHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BC03132295E0AA00253E6B /* PurchaseHistoryViewController.swift */; };
+		B9BC03162295E62E00253E6B /* PurchaseHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BC03152295E62E00253E6B /* PurchaseHistoryTableViewCell.swift */; };
+		B9BC0318229621FE00253E6B /* CustomDateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BC0317229621FE00253E6B /* CustomDateTransform.swift */; };
 		B9C378A3226FF4F9002D781D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C378A2226FF4F9002D781D /* AppDelegate.swift */; };
 		B9C378A5226FF4F9002D781D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C378A4226FF4F9002D781D /* ViewController.swift */; };
 		B9C378A8226FF4F9002D781D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9C378A6226FF4F9002D781D /* Main.storyboard */; };
@@ -47,6 +50,9 @@
 		B9BAB27D227106C50074BDC8 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		B9BC030F22950A8300253E6B /* Purchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Purchase.swift; sourceTree = "<group>"; };
 		B9BC0311229510EA00253E6B /* PurchaseShoppingCartItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseShoppingCartItem.swift; sourceTree = "<group>"; };
+		B9BC03132295E0AA00253E6B /* PurchaseHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseHistoryViewController.swift; sourceTree = "<group>"; };
+		B9BC03152295E62E00253E6B /* PurchaseHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		B9BC0317229621FE00253E6B /* CustomDateTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDateTransform.swift; sourceTree = "<group>"; };
 		B9C3789F226FF4F9002D781D /* PrimerObligatorio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrimerObligatorio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9C378A2226FF4F9002D781D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B9C378A4226FF4F9002D781D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +85,7 @@
 		B93E08C2229217FC00D47120 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				B9BC0317229621FE00253E6B /* CustomDateTransform.swift */,
 				B97270142294AD28000BF18F /* AuthenticationManager.swift */,
 				B97270152294AD29000BF18F /* AuthenticationResponse.swift */,
 				B9908B1622729121006C1A71 /* ModelManager.swift */,
@@ -111,6 +118,8 @@
 				B94FF74E2276396800EABAEF /* ShoppingCartCollectionViewCell.swift */,
 				B9C378AB226FF4F9002D781D /* LaunchScreen.storyboard */,
 				B9C378A6226FF4F9002D781D /* Main.storyboard */,
+				B9BC03132295E0AA00253E6B /* PurchaseHistoryViewController.swift */,
+				B9BC03152295E62E00253E6B /* PurchaseHistoryTableViewCell.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -273,6 +282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9BC03142295E0AA00253E6B /* PurchaseHistoryViewController.swift in Sources */,
 				B9BAB27E227106C50074BDC8 /* TableViewCell.swift in Sources */,
 				B9908B1722729121006C1A71 /* ModelManager.swift in Sources */,
 				B9BC0312229510EA00253E6B /* PurchaseShoppingCartItem.swift in Sources */,
@@ -283,8 +293,10 @@
 				B9908B1322728E5D006C1A71 /* ProductCategory.swift in Sources */,
 				B9908B152272901B006C1A71 /* ShoppingBanner.swift in Sources */,
 				B97270162294AD29000BF18F /* AuthenticationManager.swift in Sources */,
+				B9BC0318229621FE00253E6B /* CustomDateTransform.swift in Sources */,
 				B9C378A5226FF4F9002D781D /* ViewController.swift in Sources */,
 				B942E36A227140F800E8A5C8 /* CollectionViewCell.swift in Sources */,
+				B9BC03162295E62E00253E6B /* PurchaseHistoryTableViewCell.swift in Sources */,
 				B9BC031022950A8300253E6B /* Purchase.swift in Sources */,
 				B94FF751227678F300EABAEF /* ShoppingCartItem.swift in Sources */,
 				B9908B1122728DA2006C1A71 /* ShoppingItem.swift in Sources */,

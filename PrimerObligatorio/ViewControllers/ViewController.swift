@@ -40,34 +40,56 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     override func viewWillAppear(_ animated: Bool) {
 
         //SET BANNER DATA
-        ApiManager.apiManager.getBanners { (shoppingBanner) in
-            ModelManager.shared.banners = shoppingBanner
-            if !(ModelManager.shared.banners.isEmpty){
-                self.collectionViewOutlet.reloadData()
-                self.pageControlOutlet.numberOfPages = ModelManager.shared.banners.count
+        ApiManager.apiManager.getBanners {(shoppingBanner,error) in
+            if let shoppingBanner = shoppingBanner {
+
+                ModelManager.shared.banners = shoppingBanner
+                if !(ModelManager.shared.banners.isEmpty){
+                    self.collectionViewOutlet.reloadData()
+                    self.pageControlOutlet.numberOfPages = ModelManager.shared.banners.count
+                }
+                }
+            else {
+                let msgError = error?.localizedDescription
+                let Error = UIAlertController(title: "Error", message: msgError, preferredStyle: .alert)
+                let okAcction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default)
+                Error.addAction(okAcction)
+                self.present(Error, animated: true, completion: nil)
+                
             }
         }
         //SET PRODUCT DATA
-        ApiManager.apiManager.getProducts {(shoppingItem) in
-            ModelManager.shared.productData = shoppingItem
-            for i in 0...ModelManager.shared.productData.count - 1 {
-                switch ModelManager.shared.productData[i].productCategory {
-                case .fruits?:
-                    if !(ModelManager.shared.products[0].contains(where: { $0.productId == ModelManager.shared.productData[i].productId })){
-                        ModelManager.shared.products[0].append(ModelManager.shared.productData[i])
+        //startanimating
+        ApiManager.apiManager.getProducts {(shoppingItem,error) in
+            //stopanimating
+            if let shoppingItem = shoppingItem {
+                ModelManager.shared.productData = shoppingItem
+                for i in 0...ModelManager.shared.productData.count - 1 {
+                    switch ModelManager.shared.productData[i].productCategory {
+                    case .fruits?:
+                        if !(ModelManager.shared.products[0].contains(where: { $0.productId == ModelManager.shared.productData[i].productId })){
+                            ModelManager.shared.products[0].append(ModelManager.shared.productData[i])
+                        }
+                    case .veggies?:
+                        if !(ModelManager.shared.products[1].contains(where: { $0.productId == ModelManager.shared.productData[i].productId })){
+                            ModelManager.shared.products[1].append(ModelManager.shared.productData[i])
+                        }
+                    case .dairy?:
+                        if !(ModelManager.shared.products[2].contains(where: { $0.productId == ModelManager.shared.productData[i].productId })){
+                            ModelManager.shared.products[2].append(ModelManager.shared.productData[i])
+                        }
+                        
+                    default:
+                        print("Dont found categories")
                     }
-                case .veggies?:
-                    if !(ModelManager.shared.products[1].contains(where: { $0.productId == ModelManager.shared.productData[i].productId })){
-                        ModelManager.shared.products[1].append(ModelManager.shared.productData[i])
-                    }
-                case .dairy?:
-                    if !(ModelManager.shared.products[2].contains(where: { $0.productId == ModelManager.shared.productData[i].productId })){
-                        ModelManager.shared.products[2].append(ModelManager.shared.productData[i])
-                    }
-                    
-                default:
-                    print("Dont found categories")
                 }
+            }
+            else {
+                let msgError = error?.localizedDescription
+                let Error = UIAlertController(title: "Error", message: msgError, preferredStyle: .alert)
+                let okAcction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default)
+                Error.addAction(okAcction)
+                self.present(Error, animated: true, completion: nil)
             }
             if !(ModelManager.shared.products.isEmpty){
                 for product in ModelManager.shared.products{
@@ -82,10 +104,11 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
                 self.tableViewOutlet.reloadData()
             }
         }
-        ApiManager.apiManager.getPurchases { (purchase) in
-            
-            print(purchase)
-        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        collectionViewOutlet.reloadData()
     }
 
     
@@ -133,6 +156,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
             cell.productImageOutlet.image = UIImage(named:"No_image")
         }
         cell.delegate = self
+        cell.selectionStyle = .none
 
         return cell
     }
@@ -184,24 +208,12 @@ extension ViewController :UICollectionViewDataSource, UICollectionViewDelegateFl
         
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! CollectionViewCell
-        let activityIndicator = UIActivityIndicatorView()
-        // Create the activity indicator
-        activityIndicator.color = .gray
-        if ModelManager.shared.banners.isEmpty{
-            view.addSubview(activityIndicator) // add it as a  subview
-            activityIndicator.center = CGPoint(x: view.frame.size.width*0.5, y: view.frame.size.height*0.5) // put in the middle
-            activityIndicator.startAnimating() // Start animating
-            }
-        else{
-            activityIndicator.stopAnimating() // On response stop animating
-            activityIndicator.removeFromSuperview()
-            let banner = ModelManager.shared.banners[indexPath.row]
-            cell.imageBannerViewOutlet.kf.setImage(with: URL(string: banner.bannerImageName!))
-            cell.tittleLabelOutlet.text = banner.bannerTittle
-            cell.descriptionLabelOutlet.text = banner.bannerDescription
-            cell.layer.masksToBounds = true
-            cell.layer.cornerRadius = 12
-        }
+        let banner = ModelManager.shared.banners[indexPath.row]
+        cell.imageBannerViewOutlet.kf.setImage(with: URL(string: banner.bannerImageName!))
+        cell.tittleLabelOutlet.text = banner.bannerTittle
+        cell.descriptionLabelOutlet.text = banner.bannerDescription
+        cell.imageBannerViewOutlet.layer.masksToBounds = true
+        cell.imageBannerViewOutlet.layer.cornerRadius = 12
         return cell
 
     }
@@ -212,9 +224,16 @@ extension ViewController :UICollectionViewDataSource, UICollectionViewDelegateFl
     
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionViewOutlet.frame.size.width - 8 , height: collectionViewOutlet.frame.size.height)
+        return CGSize(width: collectionViewOutlet.frame.size.width , height: collectionViewOutlet.frame.size.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
     }
 
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
+    }
 }
 
 //Code to administrate the search view of the table
