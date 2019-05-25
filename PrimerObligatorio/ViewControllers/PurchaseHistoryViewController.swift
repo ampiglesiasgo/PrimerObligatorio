@@ -11,6 +11,9 @@ import UIKit
 class PurchaseHistoryViewController: UIViewController,  UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var purchaseTableViewOutlet: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var noPurchaseHistorylabel: UILabel!
+    
     var purchaseList = [Purchase]()
     var purchaseItem = [PurchaseShoppingCartItem]()
 
@@ -22,12 +25,23 @@ class PurchaseHistoryViewController: UIViewController,  UITableViewDataSource, U
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        noPurchaseHistorylabel.isHidden = true
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+        purchaseTableViewOutlet.isHidden = true
         AuthenticationManager.shared.authenticate { (response) in
             let token = "Bearer \(response.token)"
             ApiManager.apiManager.getPurchases(token: token) { (purchase,error) in
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
+                self.purchaseTableViewOutlet.isHidden = false
                 if let purchase = purchase {
                     self.purchaseList = purchase
                     self.purchaseTableViewOutlet.reloadData()
+                    if self.purchaseList.isEmpty{
+                        self.noPurchaseHistorylabel.isHidden = false
+                        self.noPurchaseHistorylabel.text = "You don't have a purchase history"
+                    }
                 }
                 else {
                     let msgError = error?.localizedDescription

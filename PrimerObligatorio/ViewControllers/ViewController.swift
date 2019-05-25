@@ -17,7 +17,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     @IBOutlet weak var collectionViewOutlet: UICollectionView!
     @IBOutlet weak var pageControlOutlet: UIPageControl!
     @IBOutlet weak var searchBarOutlet: UISearchBar!
-    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     private var currentPage: Int = 0
     var widthCell:CGFloat = 0
@@ -40,6 +40,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     override func viewWillAppear(_ animated: Bool) {
 
         //SET BANNER DATA
+        activityIndicator.startAnimating()
         ApiManager.apiManager.getBanners {(shoppingBanner,error) in
             if let shoppingBanner = shoppingBanner {
 
@@ -61,7 +62,8 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         //SET PRODUCT DATA
         //startanimating
         ApiManager.apiManager.getProducts {(shoppingItem,error) in
-            //stopanimating
+            self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
             if let shoppingItem = shoppingItem {
                 ModelManager.shared.productData = shoppingItem
                 for i in 0...ModelManager.shared.productData.count - 1 {
@@ -109,6 +111,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionViewOutlet.reloadData()
+
     }
 
     

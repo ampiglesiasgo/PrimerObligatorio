@@ -14,6 +14,7 @@ class ShoppingCartViewController: UIViewController , UICollectionViewDataSource,
     @IBOutlet weak var priceTotalOutlet: UILabel!
     @IBOutlet weak var checkOutButtonOutlet: UIButton!
     @IBOutlet weak var shoppingCartLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var shopingCartList = [ShoppingCartItem]()
     var purchaseList = [PurchaseShoppingCartItem]()
@@ -35,6 +36,7 @@ class ShoppingCartViewController: UIViewController , UICollectionViewDataSource,
     override func viewWillAppear(_ animated: Bool) {
         if shopingCartList.count == 0 || fromPurcharseList {
             checkOutButtonOutlet.isHidden = true
+
         }
         if fromPurcharseList{
             ShoppingCartCollectionViewOutlet.reloadData()
@@ -43,6 +45,7 @@ class ShoppingCartViewController: UIViewController , UICollectionViewDataSource,
         else {
             shoppingCartLabel.text = "Shopping Cart"
         }
+        activityIndicator.isHidden = true
         total()
     }
     
@@ -106,9 +109,13 @@ class ShoppingCartViewController: UIViewController , UICollectionViewDataSource,
     
     //Function of the checkOut button
     @IBAction func checkOutButtonAction(_ sender: Any) {
+        activityIndicator.isHidden = false
+        self.activityIndicator.startAnimating()
         AuthenticationManager.shared.authenticate(onCompletion: {response in
             let token = "Bearer \(response.token)"
             ApiManager.apiManager.checkOutApi(token: token, shoppingCartItems: self.shopingCartList) { (message,error) in
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
                 if let msgPurchase = message{
                     let checkOutInMsg = UIAlertController(title: "CheckOut", message: msgPurchase, preferredStyle: .alert)
                     let okAcction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default){
