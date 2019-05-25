@@ -110,7 +110,7 @@ class ShoppingCartViewController: UIViewController , UICollectionViewDataSource,
     //Function of the checkOut button
     @IBAction func checkOutButtonAction(_ sender: Any) {
         activityIndicator.isHidden = false
-        self.activityIndicator.startAnimating()
+        activityIndicator.startAnimating()
         AuthenticationManager.shared.authenticate(onCompletion: {response in
             let token = "Bearer \(response.token)"
             ApiManager.apiManager.checkOutApi(token: token, shoppingCartItems: self.shopingCartList) { (message,error) in

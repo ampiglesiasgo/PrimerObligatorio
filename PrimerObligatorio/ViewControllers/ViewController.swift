@@ -281,6 +281,10 @@ extension ViewController : UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBarOutlet.endEditing(true)
     }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchBarOutlet.endEditing(true)
+    }
 }
 //Define the function of the TableViewCellDelegate delegate.
 extension ViewController: TableViewCellDelegate {
