@@ -27,8 +27,8 @@ class PurchaseHistoryViewController: UIViewController,  UITableViewDataSource, U
     override func viewWillAppear(_ animated: Bool) {
         noPurchaseHistorylabel.isHidden = true
         activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
         purchaseTableViewOutlet.isHidden = true
+        activityIndicator.startAnimating()
         AuthenticationManager.shared.authenticate { (response) in
             let token = "Bearer \(response.token)"
             ApiManager.apiManager.getPurchases(token: token) { (purchase,error) in

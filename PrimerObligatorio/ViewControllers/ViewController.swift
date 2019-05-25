@@ -275,6 +275,12 @@ extension ViewController : UISearchBarDelegate {
 
         }
         tableViewOutlet.reloadData()
+        
+        if searchBar.text == nil || searchBar.text == ""
+        {
+            //Text control to stop waiting for input – which in turn dismisses the keyboard
+            searchBar.perform(#selector(self.resignFirstResponder), with: nil, afterDelay: 0.1)
+        }
 
     }
     
