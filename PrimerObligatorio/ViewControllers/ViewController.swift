@@ -277,6 +277,10 @@ extension ViewController : UISearchBarDelegate {
         tableViewOutlet.reloadData()
 
     }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBarOutlet.endEditing(true)
+    }
 }
 //Define the function of the TableViewCellDelegate delegate.
 extension ViewController: TableViewCellDelegate {
