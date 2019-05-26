@@ -72,13 +72,14 @@ class ShoppingCartViewController: UIViewController , UICollectionViewDataSource,
                 if let productName = product.productName{
                     cell.shoppingCartNameItemOutlet.text = productName
                 }
-                if let productPrice = product.productPrice{
-
-                    cell.shoppingCartPriceItemOutlet.text = "$" + String(describing: productPrice)
+                else {
+                    cell.shoppingCartNameItemOutlet.text = "Product Name not available"
                 }
+                cell.shoppingCartPriceItemOutlet.text = "$" + String(describing: product.productPrice)
                 if let productQuantity = purchaseShoppingItem.quantity{
                     cell.shoppingCartCantItemOutlet.text = String(describing: productQuantity) + " units"
                 }
+                else {cell.shoppingCartCantItemOutlet.text = "No product units available"}
             }
         }
         else {
@@ -92,8 +93,11 @@ class ShoppingCartViewController: UIViewController , UICollectionViewDataSource,
             else{
                 cell.shoppingCartImageOutlet.image = UIImage(named:"No_image")
             }
-            cell.shoppingCartNameItemOutlet.text = shoppingItem.product.productName
-            cell.shoppingCartPriceItemOutlet.text = "$" + String(describing: shoppingItem.product.productPrice!)
+            if let productName = shoppingItem.product.productName{
+                cell.shoppingCartNameItemOutlet.text = productName
+            }
+            else {cell.shoppingCartNameItemOutlet.text = "Product Name not available"}
+            cell.shoppingCartPriceItemOutlet.text = "$" + String(describing: shoppingItem.product.productPrice)
             cell.shoppingCartCantItemOutlet.text = String(shoppingItem.quantity) + " units"
         }
     

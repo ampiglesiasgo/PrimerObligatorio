@@ -150,8 +150,13 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
             cell.addButtonOutlet.isHidden = false
             cell.buttonPlusViewOutlet.isHidden = true
         }
-        cell.nameLabelOutlet.text = item.productName
-        cell.priceLabelOutlet.text = "$" + String(describing: item.productPrice!)
+        if let productName = item.productName {
+            cell.nameLabelOutlet.text = productName
+        }
+        else {
+            cell.nameLabelOutlet.text = "Product Name not available"
+        }
+        cell.priceLabelOutlet.text = "$" + String(describing: item.productPrice)
         if let productImageName = item.productImageName{
             cell.productImageOutlet.kf.setImage(with: URL(string: productImageName))
         }
@@ -212,9 +217,21 @@ extension ViewController :UICollectionViewDataSource, UICollectionViewDelegateFl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! CollectionViewCell
         let banner = ModelManager.shared.banners[indexPath.row]
-        cell.imageBannerViewOutlet.kf.setImage(with: URL(string: banner.bannerImageName!))
-        cell.tittleLabelOutlet.text = banner.bannerTittle
-        cell.descriptionLabelOutlet.text = banner.bannerDescription
+        if let bannerImageName = banner.bannerImageName {
+            cell.imageBannerViewOutlet.kf.setImage(with: URL(string: bannerImageName))
+        }
+        else{
+            cell.imageBannerViewOutlet.image = UIImage(named:"No_image")
+        }
+        if let bannerTittle =  banner.bannerTittle{
+            cell.tittleLabelOutlet.text = bannerTittle
+        }
+        else {cell.tittleLabelOutlet.text = "The banner tittle in not available"}
+        if let bannerDescription = banner.bannerDescription  {
+            cell.descriptionLabelOutlet.text = bannerDescription
+        }
+        else {cell.descriptionLabelOutlet.text = "The banner description in not available"}
+        
         cell.imageBannerViewOutlet.layer.masksToBounds = true
         cell.imageBannerViewOutlet.layer.cornerRadius = 12
         return cell

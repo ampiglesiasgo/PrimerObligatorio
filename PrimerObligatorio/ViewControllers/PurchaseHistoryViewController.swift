@@ -105,7 +105,9 @@ extension PurchaseHistoryViewController: PurchaseHistoryTableViewCellDelegate {
     
     func showDetails(cell: PurchaseHistoryTableViewCell) {
         guard let indexPath = purchaseTableViewOutlet.indexPath(for: cell) else { return }
-        purchaseItem = purchaseList[indexPath.row].products!
+        if let products = purchaseList[indexPath.row].products {
+            purchaseItem = products
+        }
         performSegue(withIdentifier: "purcheseHistoryViewControllerSegue", sender: self)
 
     }

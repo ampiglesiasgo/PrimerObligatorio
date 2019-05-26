@@ -13,7 +13,7 @@ class PurchaseShoppingCartItem {
     
     var quantity : Int?
     var product : ShoppingItem?
-    var subTotal : Double { get { if let product = product{if let price = product.productPrice {if let quantity = quantity{return price * Double(quantity)} else {return 0}} else {return 0}} else {return 0}}}
+    var subTotal : Double { get { if let product = product {if let quantity = quantity{return product.productPrice * Double(quantity)} else {return 0}} else {return 0}}}
     
     
     required init?(map: Map) {
