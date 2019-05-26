@@ -20,7 +20,6 @@ class ApiManager {
     
     func getProducts( completionHandler: @escaping ([ShoppingItem]?,Error?) -> Void){
         let url = baseUrl + "/products"
-        //let url = baseUrl + "/product" //Only for test Error
         Alamofire.request(url,method: .get).responseArray { (response: DataResponse<[ShoppingItem]>) in
 
             guard response.result.isSuccess else {
@@ -35,7 +34,6 @@ class ApiManager {
     
     func getBanners(completionHandler: @escaping ([ShoppingBanner]?,Error?) -> Void){
             let url = baseUrl + "/promoted"
-           // let url = baseUrl + "/promote" //Only for test Error
             Alamofire.request(url,method: .get).responseArray { (response: DataResponse<[ShoppingBanner]>) in
         
                 guard response.result.isSuccess else {
