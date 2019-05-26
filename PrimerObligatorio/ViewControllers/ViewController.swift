@@ -220,9 +220,8 @@ extension ViewController :UICollectionViewDataSource, UICollectionViewDelegateFl
         return cell
 
     }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        pageControlOutlet.currentPage = indexPath.row
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        pageControlOutlet.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
     }
     
 
