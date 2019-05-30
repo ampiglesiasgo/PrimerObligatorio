@@ -26,15 +26,12 @@ class PurchaseHistoryViewController: UIViewController,  UITableViewDataSource, U
     
     override func viewWillAppear(_ animated: Bool) {
         noPurchaseHistorylabel.isHidden = true
-        activityIndicator.isHidden = false
-        purchaseTableViewOutlet.isHidden = true
         activityIndicator.startAnimating()
         AuthenticationManager.shared.authenticate { (response) in
             let token = "Bearer \(response.token)"
             ApiManager.apiManager.getPurchases(token: token) { (purchase,error) in
-                self.activityIndicator.stopAnimating()
-                self.activityIndicator.isHidden = true
                 self.purchaseTableViewOutlet.isHidden = false
+                self.activityIndicator.stopAnimating()
                 if let purchase = purchase {
                     self.purchaseList = purchase
                     self.purchaseTableViewOutlet.reloadData()
@@ -51,6 +48,8 @@ class PurchaseHistoryViewController: UIViewController,  UITableViewDataSource, U
                     self.present(Error, animated: true, completion: nil)
                 }
             }
+            self.activityIndicator.isHidden = true
+
         }
 
     }
