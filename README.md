@@ -6,24 +6,27 @@ Las funcionalidades que comprende el obligatorio se comprenden en dos pantallas 
 describen en las siguientes páginas, también se proveen imagen mostrando el diseño de UI
 buscado, la aplicación deberá verse exactamente como dichas imágenes.
 
-Pantalla principal
+## Pantalla principal
+
 Contiene:
-● Un carrito en la parte superior
+- Un carrito en la parte superior
 derecha que permitirá navegar a la
 pantalla de checkout.
-● Un banner con propagandas sobre
+- Un banner con propagandas sobre
 artículos destacados.
-● Un search que permitirá filtrar el
+- Un search que permitirá filtrar el
 listado de artículos por nombres y
 categorías.
-● Un listado de artículos.
-Por defecto todas las celdas del listado
+- Un listado de artículos.
+- Por defecto todas las celdas del listado
 tendrán el botón de "Add" visible. Si hay una
 o más unidades seleccionadas del mismo
 artículo, se ocultará el botón y se regulará la
 cantidad de unidades con los botones de "+"
 y "-".
-Pantalla de checkout
+
+## Pantalla de checkout
+
 En ella se podrán visualizar los elementos
 que se encuentran en el carrito de
 compras antes de confirmarlo. Si no hay
